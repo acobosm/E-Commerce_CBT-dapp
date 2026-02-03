@@ -1,0 +1,27 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import "forge-std/Script.sol";
+import "../src/CBToken.sol";
+
+contract DeployCBToken is Script {
+    function run() external returns (CBToken) {
+        // En Anvil, la primera cuenta suele ser 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+        uint256 deployerPrivateKey = vm.envOr(
+            "PRIVATE_KEY",
+            uint256(
+                0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+            )
+        );
+
+        vm.startBroadcast(deployerPrivateKey);
+
+        CBToken token = new CBToken(vm.addr(deployerPrivateKey));
+
+        // Mint inicial de 1,000,000 tokens (con 6 decimales)
+        token.mint(vm.addr(deployerPrivateKey), 1_000_000 * 10 ** 6);
+
+        vm.stopBroadcast();
+        return token;
+    }
+}

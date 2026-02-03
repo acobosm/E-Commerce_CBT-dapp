@@ -1,0 +1,62 @@
+# Tarea: Proyecto E-Commerce Blockchain con Stablecoins
+
+- [x] **Infraestructura y Estructura Base** [/]
+    - [x] Crear estructura de directorios `[stablecoin, sc-ecommerce, web-admin, web-customer]`
+    - [x] Inicializar Foundry en `stablecoin/sc`
+    - [x] Inicializar Foundry en `sc-ecommerce`
+    - [x] **Punto de Control:** Subir a rama `feature/infra-setup` y pausar para revisión.
+
+- [ ] **Parte 1: CBToken (Stablecoin)** [ ]
+    - [ ] Implementar `CBToken.sol` (ERC20, 6 decimales, Minteable)
+    - [ ] Escribir tests para `CBToken.sol`
+    - [ ] Crear script de despliegue `DeployCBToken.s.sol`
+    - [ ] Verificar despliegue en Anvil
+    - [ ] **Punto de Control:** Subir a rama `feature/cbtoken-sc` y pausar para revisión.
+
+- [ ] **Parte 2: App de Compra de Stablecoins** [ ]
+    - [ ] Inicializar app Next.js en `stablecoin/compra-stablecoin`
+    - [ ] Configurar integración con Stripe (Backend/Elements)
+    - [ ] Implementar conexión con MetaMask
+    - [ ] Implementar API de Minting y Frontend
+    - [ ] **Punto de Control:** Subir a rama `feature/stablecoin-purchase` y pausar para revisión.
+
+- [ ] **Parte 3: Pasarela de Pago** [ ]
+    - [ ] Inicializar app Next.js en `stablecoin/pasarela-de-pago`
+    - [ ] Implementar lógica de pago con tokens
+    - [ ] Lógica de redirección tras el pago
+    - [ ] **Punto de Control:** Subir a rama `feature/payment-gateway` y pausar para revisión.
+
+- [ ] **Parte 4: Smart Contracts de E-Commerce** [ ]
+    - [ ] Implementar Librerías (Company, Product, Cart, Invoice, Payment)
+    - [ ] Implementar contrato principal `Ecommerce.sol`
+    - [ ] Tests exhaustivos del flujo de E-commerce
+    - [ ] Script de despliegue para Ecommerce
+    - [ ] **Punto de Control:** Subir a rama `feature/ecommerce-sc` y pausar para revisión.
+
+- [ ] **Parte 5: Panel de Administración Web** [ ]
+    - [ ] Inicializar app Next.js en `web-admin`
+    - [ ] Registro de empresas y gestión de productos
+    - [ ] Visualización y filtrado de facturas
+    - [ ] **Punto de Control:** Subir a rama `feature/web-admin` y pausar para revisión.
+
+- [ ] **Parte 6: Tienda Web para Clientes** [ ]
+    - [ ] Inicializar app Next.js en `web-customer`
+    - [ ] Catálogo de productos y gestión del carrito
+    - [ ] Flujo de checkout e historial de facturas
+    - [ ] **Punto de Control:** Subir a rama `feature/web-customer` y pausar para revisión.
+
+- [ ] **Parte 7: Integración y Funciones Opcionales** [ ]
+    - [ ] Crear script `restart-all.sh`
+    - [ ] Implementar soporte multi-moneda (Bonus)
+    - [ ] Implementar sistema de reseñas (Bonus)
+    - [ ] Implementar recompensas Loyalty/NFT (Bonus)
+    - [ ] **Punto de Control:** Subir a rama `feature/integration-bonus` y pausar para revisión.
+
+- [ ] **Parte 8: Revisión Final y Documentación** [ ]
+    - [ ] Pruebas finales de extremo a extremo
+    - [ ] Escribir README y guía de usuario
+    - [ ] **Punto de Control:** Merge a `main` y entrega final.
+
+- [ ] **Parte 9: Preparación de Video Demostrativo** [ ]
+    - [ ] Guion del Video (`Documentacion/Discurso_Video.md`)
+    - [ ] Grabación y revisión del flujo

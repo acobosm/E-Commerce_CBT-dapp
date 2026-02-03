@@ -1,0 +1,18 @@
+# Blockchain (Foundry)
+out/
+cache/
+broadcast/
+
+# Dependencias de Node (web-admin, web-customer)
+node_modules/
+.next/
+dist/
+
+# Entorno y Secretos (Stripe y llaves privadas)
+.env
+.env.local
+.env.auth
+
+# Archivos de Sistema
+.DS_Store
+Thumbs.db
