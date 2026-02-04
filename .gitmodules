@@ -1,0 +1,6 @@
+[submodule "sc-ecommerce/lib/forge-std"]
+	path = sc-ecommerce/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "stablecoin/sc/lib/forge-std"]
+	path = stablecoin/sc/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std

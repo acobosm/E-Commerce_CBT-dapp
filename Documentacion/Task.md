@@ -6,11 +6,11 @@
     - [x] Inicializar Foundry en `sc-ecommerce`
     - [x] **Punto de Control:** Subir a rama `feature/infra-setup` y pausar para revisión.
 
-- [ ] **Parte 1: CBToken (Stablecoin)** [ ]
-    - [ ] Implementar `CBToken.sol` (ERC20, 6 decimales, Minteable)
-    - [ ] Escribir tests para `CBToken.sol`
-    - [ ] Crear script de despliegue `DeployCBToken.s.sol`
-    - [ ] Verificar despliegue en Anvil
+- [x] **Parte 1: CBToken (Stablecoin)** [ ]
+    - [x] Implementar `CBToken.sol` (ERC20, 6 decimales, Minteable)
+    - [x] Escribir tests para `CBToken.sol`
+    - [x] Crear script de despliegue `DeployCBToken.s.sol`
+    - [x] Verificar despliegue en Anvil
     - [ ] **Punto de Control:** Subir a rama `feature/cbtoken-sc` y pausar para revisión.
 
 - [ ] **Parte 2: App de Compra de Stablecoins** [ ]
