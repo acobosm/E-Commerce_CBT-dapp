@@ -20,11 +20,12 @@
     - [x] Implementar API de Minting y Frontend
     - [x] **Punto de Control:** Subir a rama `feature/stablecoin-purchase` y pausar para revisión.
 
-- [ ] **Parte 3: Pasarela de Pago** [ ]
-    - [ ] Inicializar app Next.js en `stablecoin/pasarela-de-pago`
-    - [ ] Implementar lógica de pago con tokens
-    - [ ] Lógica de redirección tras el pago
-    - [ ] **Punto de Control:** Subir a rama `feature/payment-gateway` y pausar para revisión.
+- [x] **Parte 3: Pasarela de Pago** [x]
+    - [x] Inicializar app Next.js en `stablecoin/pasarela-de-pago`
+    - [x] Implementar lógica de pago con tokens
+    - [x] Lógica de redirección tras el pago
+    - [x] **Fase 3.1:** Refinamiento de Usabilidad (Balance, Desconexión, Enlace de Compra)
+    - [x] **Punto de Control:** Subir a rama `feature/payment-gateway` y pausar para revisión.
 
 - [ ] **Parte 4: Smart Contracts de E-Commerce** [ ]
     - [ ] Implementar Librerías (Company, Product, Cart, Invoice, Payment)

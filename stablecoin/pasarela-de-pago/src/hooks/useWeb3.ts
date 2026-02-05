@@ -52,7 +52,7 @@ export const useWeb3 = () => {
     };
 
     useEffect(() => {
-        initProvider();
+        initProvider(); // Intentar detectar conexión existente al montar
 
         if (typeof window.ethereum !== "undefined") {
             window.ethereum.on("accountsChanged", async (accounts: any) => {

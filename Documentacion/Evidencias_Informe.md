@@ -121,5 +121,55 @@ Para esta fase de la aplicación de compra, se han desarrollado los siguientes a
 
 ---
 
+## 4. Parte 3: Pasarela de Pago con Tokens
+
+### Build Exitoso de la Pasarela
+**Comando:** `cd stablecoin/pasarela-de-pago && npm run build`
+**Resultado (Verificado 05/02/2026):**
+```text
+✓ Finalizing page optimization
+Route (app)
+┌ ○ /
+└ ○ /_not-found
+```
+
+### Componentes de Pago
+- **useWeb3 Hook**: Implementado para gestión de conexión y balance.
+- **PaymentProcessor**: Interfaz de pago con resumen de orden y validación de saldo CBT.
+- **Interacción Blockchain**: Ejecución de `transfer` hacia la wallet del comercio.
+
+- **Sincronización de UI (Pasarela & Portal de Compra)**: Unificación visual de ambas aplicaciones siguiendo el esquema horizontal solicitado. Ahora el Portal de Compra (6001) es 100% transparente, mostrando la billetera receptora y el saldo antes de la transacción.
+- **Gestión de Errores Amigables**: Implementación de traducciones dinámicas para errores de MetaMask (ej: "rejected" ahora se muestra como "rejected - Transacción Cancelada por el Usuario").
+- **Persistencia y Sincronización Global**: Refactorización de `useWeb3.ts` en ambos proyectos para detección automática de MetaMask y actualización de balance en tiempo real.
+- **Responsividad Unificada y Adaptativa**: Implementación de encabezados "Stack / Flex" que se apilan verticalmente en móviles (`flex-col`) para evitar solapamientos y se distribuyen horizontalmente en escritorio (`sm:flex-row`).
+- **Arquitectura de Roles y Segregación de Fondos**: División estricta de responsabilidades por cuenta (Tesorería, Comercio, Clientes, Proveedores) para garantizar la integridad de la reserva inicial (1M CBT) y la transparencia en las ventas.
+
+### 4. Arquitectura de Roles (Anvil)
+Para garantizar una contabilidad limpia y proteger los fondos de reserva, se ha implementado el siguiente esquema de segregación:
+
+| Actor | Dirección MetaMask | Propósito | Restricciones de Aplicación |
+| :--- | :--- | :--- | :--- |
+| **Tesorería (Admin)** | `0xf39F...2266` (Cuenta 0) | Custodia del 1M CBT inicial. | Bloqueado para compra de tokens/productos. |
+| **Comercio (Ventas)** | `0x7099...79C8` (Cuenta 1) | Receptor oficial de ingresos por ventas. | Bloqueado para autocompra de productos. |
+| **Clientes** | `Cuenta 2 a 6` | Usuarios finales de la plataforma. | Sin restricciones (Flujo completo CBT). |
+| **Proveedores** | `Cuenta 7 a 9` | Abastecimiento (Futura expansión). | Pueden comprar tokens/ítems actualmente. |
+
+### Archivos Relevantes de la Pasarela
+Se han desarrollado los siguientes archivos para la lógica de pago:
+
+1.  **Lógica y Hooks:**
+    - `stablecoin/pasarela-de-pago/src/hooks/useWeb3.ts`: Gestión de conexión y balance local.
+    - `stablecoin/pasarela-de-pago/src/types/index.d.ts`: Tipados globales para MetaMask.
+2.  **Interfaz de Usuario:**
+    - `stablecoin/pasarela-de-pago/src/components/PaymentProcessor.tsx`: Procesador de pagos con validación de saldo.
+    - `stablecoin/pasarela-de-pago/src/app/page.tsx`: Integración del procesador y consistencia visual.
+3.  **Configuración:**
+    - `stablecoin/pasarela-de-pago/src/app/globals.css`: Estilos premium compartidos.
+    - `stablecoin/pasarela-de-pago/package.json`: Configuración de puerto (6002).
+
+---
+
+---
+
 > [!TIP]
 > **Para tu informe:** Te recomiendo tomar capturas de pantalla de tu propia terminal cuando ejecutes el despliegue en Anvil, ya que eso mostrará las direcciones reales que se generen en tu máquina.

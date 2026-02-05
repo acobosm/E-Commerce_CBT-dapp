@@ -55,7 +55,32 @@ El objetivo era permitir la entrada de capital tradicional (Fiat) al sistema med
 
 ---
 
+## 🛡️ Parte 3: Pasarela de Pago con Tokens (Completado)
+
+El objetivo era crear una aplicación independiente que sirva como procesador de pagos para el e-commerce, permitiendo transacciones directas con CBTokens.
+
+### Funcionalidades Core
+- [x] **Next.js Scaffolding**: Inicialización del proyecto en `stablecoin/pasarela-de-pago`.
+- [x] **Web3 Integration**: Conexión con MetaMask y detección de red Anvil.
+- [x] **Payment Workflow**: 
+  - Consultar balance de CBT del usuario.
+  - Ejecutar transacciones de pago (transferencias) hacia la wallet del comercio.
+  - Gestión de estados (Pendiente, Exitoso, Fallido).
+- [x] **Redirección e Interfaz**: UI consistente con el portal de compra y redirección inteligente tras confirmación.
+
+### Verificación Exitosa
+- [x] Build exitoso de Next.js generado sin errores.
+- [x] Validación de la lógica de transferencia hacia la `MERCHANT_ADDRESS`.
+- [x] Consistencia visual mantenida (Header, Footer y diseño Mesh).
+
+### Fase 3.1: Refinamiento de Usabilidad
+- [x] **Transparencia de Wallet**: Etiquetas explícitas para dirección y saldo.
+- [x] **UX de Error**: Inclusión del saldo actual en el mensaje de error de fondos insuficientes.
+- [x] **Acciones Dinámicas**: Botón de desconexión y enlace a portal de compra (:6001).
+- [x] **Ajuste de Layout**: Tarjeta ensanchada para mejor legibilidad.
+
+---
+
 ## 🛒 Próximas Fases:
-- **Parte 3:** Pasarela de Pago con Tokens (Siguiente Paso).
-- **Parte 4:** Smart Contracts de E-Commerce (Lógica de Negocio).
+- **Parte 4:** Smart Contracts de E-Commerce (Lógica de Negocio) (Siguiente Paso).
 - **Parte 5 & 6:** Paneles Web (Admin y Cliente).
