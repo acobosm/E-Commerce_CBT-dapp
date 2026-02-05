@@ -6,19 +6,19 @@
     - [x] Inicializar Foundry en `sc-ecommerce`
     - [x] **Punto de Control:** Subir a rama `feature/infra-setup` y pausar para revisión.
 
-- [x] **Parte 1: CBToken (Stablecoin)** [ ]
+- [x] **Parte 1: CBToken (Stablecoin)** [x]
     - [x] Implementar `CBToken.sol` (ERC20, 6 decimales, Minteable)
     - [x] Escribir tests para `CBToken.sol`
     - [x] Crear script de despliegue `DeployCBToken.s.sol`
     - [x] Verificar despliegue en Anvil
-    - [ ] **Punto de Control:** Subir a rama `feature/cbtoken-sc` y pausar para revisión.
+    - [x] **Punto de Control:** Subir a rama `feature/cbtoken-sc` y pausar para revisión.
 
-- [ ] **Parte 2: App de Compra de Stablecoins** [ ]
-    - [ ] Inicializar app Next.js en `stablecoin/compra-stablecoin`
-    - [ ] Configurar integración con Stripe (Backend/Elements)
-    - [ ] Implementar conexión con MetaMask
-    - [ ] Implementar API de Minting y Frontend
-    - [ ] **Punto de Control:** Subir a rama `feature/stablecoin-purchase` y pausar para revisión.
+- [x] **Parte 2: App de Compra de Stablecoins** [x]
+    - [x] Inicializar app Next.js en `stablecoin/compra-stablecoin`
+    - [x] Configurar integración con Stripe (Backend/Elements)
+    - [x] Implementar conexión con MetaMask
+    - [x] Implementar API de Minting y Frontend
+    - [x] **Punto de Control:** Subir a rama `feature/stablecoin-purchase` y pausar para revisión.
 
 - [ ] **Parte 3: Pasarela de Pago** [ ]
     - [ ] Inicializar app Next.js en `stablecoin/pasarela-de-pago`

@@ -80,5 +80,46 @@ Prueba final de que el mint inicial funcionó.
 
 ---
 
+## 3. Parte 2: App de Compra de Stablecoins
+
+### Build Exitoso de Next.js
+Confirmación de que la aplicación frontend y sus APIs están listas.
+**Comando:** `cd stablecoin/compra-stablecoin && npm run build`
+**Resultado (Verificado 04/02/2026):**
+```text
+✓ Finalizing page optimization
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /api/create-payment-intent
+└ ƒ /api/mint-tokens
+```
+
+### Integración y UI Premium
+- **Hook useWeb3**: Gestión de estados de MetaMask.
+- **API Minting**: Lógica de backend para interactuar con el Smart Contract tras el pago.
+- **Stripe Elements**: Interfaz de pago segura implementada.
+- **Diseño Responsivo**: Reestructuración del layout para evitar solapamientos en dispositivos móviles y resoluciones bajas (Flexbox nativo).
+- **Animaciones**: Implementación de Micro-animaciones (Next.js/Tailwind) para transiciones fluidas.
+
+### Archivos Relevantes Creados
+Para esta fase de la aplicación de compra, se han desarrollado los siguientes archivos clave:
+
+1.  **Configuración y Estilos:**
+    - `stablecoin/compra-stablecoin/src/app/globals.css`: Sistema de diseño premium y tokens de CSS.
+    - `stablecoin/compra-stablecoin/src/types/index.d.ts`: Definiciones globales para compatibilidad de TypeScript con MetaMask.
+    - `stablecoin/compra-stablecoin/.env.local`: Configuración de variables de entorno (Stripe y Blockchain).
+
+2.  **Lógica Web3 y UI:**
+    - `stablecoin/compra-stablecoin/src/hooks/useWeb3.ts`: Hook personalizado para gestionar la conexión con la wallet.
+    - `stablecoin/compra-stablecoin/src/components/PurchaseCard.tsx`: Componente principal que coordina el flujo de compra.
+    - `stablecoin/compra-stablecoin/src/components/CheckoutForm.tsx`: Integración con Stripe Elements para el formulario de pago.
+
+3.  **Backend (API Routes):**
+    - `stablecoin/compra-stablecoin/src/app/api/create-payment-intent/route.ts`: Endpoint para iniciar pagos en Stripe.
+    - `stablecoin/compra-stablecoin/src/app/api/mint-tokens/route.ts`: Lógica segura que ejecuta el `mint` del Smart Contract tras validar el pago.
+
+---
+
 > [!TIP]
 > **Para tu informe:** Te recomiendo tomar capturas de pantalla de tu propia terminal cuando ejecutes el despliegue en Anvil, ya que eso mostrará las direcciones reales que se generen en tu máquina.

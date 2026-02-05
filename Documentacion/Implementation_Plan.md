@@ -36,22 +36,26 @@ Implementación del motor económico del proyecto: el CBToken (CBT), anclado al 
 
 ---
 
-## 💳 Parte 2: App de Compra de Stablecoins (Siguiente Paso)
+## 💳 Parte 2: App de Compra de Stablecoins (Completado)
 
-El objetivo es permitir la entrada de capital tradicional (Fiat) al sistema mediante integración con Stripe.
+El objetivo era permitir la entrada de capital tradicional (Fiat) al sistema mediante integración con Stripe.
 
 ### Frontend & Backend (Next.js)
-- [ ] **Stripe Integration**: Configuración de `PaymentIntent` y Stripe Elements.
-- [ ] **MetaMask Web3**: Conexión de billetera para recibir los tokens.
-- [ ] **Automated Minting**: Backend seguro que ejecuta la función `mint` tras la confirmación del pago en Stripe.
+- [x] **Stripe Integration**: Configuración de `PaymentIntent` y Stripe Elements.
+- [x] **MetaMask Web3**: Conexión de billetera para recibir los tokens.
+- [x] **Automated Minting**: Backend seguro que ejecuta la función `mint` tras la confirmación del pago en Stripe.
+- [x] **UI Responsiva**: Layout adaptable que garantiza legibilidad en todas las resoluciones.
 
-### Verificación Planeada
-- Simulación de pagos con tarjetas de prueba.
-- Verificación de la recepción automática de tokens en la wallet del cliente.
+### Verificación Final
+- [x] Validación de variables de entorno configuradas con llaves de prueba de Stripe.
+- [x] Build de Next.js generado exitosamente.
+- [x] Confirmación de minteo exitoso verificado vía `cast call` (Saldos actualizados correctamente).
+- [x] Validación visual de la interfaz corregida.
+
 
 ---
 
 ## 🛒 Próximas Fases:
-- **Parte 3:** Pasarela de Pago con Tokens.
+- **Parte 3:** Pasarela de Pago con Tokens (Siguiente Paso).
 - **Parte 4:** Smart Contracts de E-Commerce (Lógica de Negocio).
 - **Parte 5 & 6:** Paneles Web (Admin y Cliente).
