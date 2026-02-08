@@ -16,3 +16,6 @@ dist/
 # Archivos de Sistema
 .DS_Store
 Thumbs.db
+
+# Metadatos de Windows
+*.Identifier

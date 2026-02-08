@@ -27,12 +27,12 @@
     - [x] **Fase 3.1:** Refinamiento de Usabilidad (Balance, Desconexión, Enlace de Compra)
     - [x] **Punto de Control:** Subir a rama `feature/payment-gateway` y pausar para revisión.
 
-- [ ] **Parte 4: Smart Contracts de E-Commerce** [ ]
-    - [ ] Implementar Librerías (Company, Product, Cart, Invoice, Payment)
-    - [ ] Implementar contrato principal `Ecommerce.sol`
-    - [ ] Tests exhaustivos del flujo de E-commerce
-    - [ ] Script de despliegue para Ecommerce
-    - [ ] **Punto de Control:** Subir a rama `feature/ecommerce-sc` y pausar para revisión.
+- [x] **Parte 4: Smart Contracts de E-Commerce** [x]
+    - [x] Implementar Librerías (Company, Product, Cart, Invoice, Client)
+    - [x] Implementar contrato principal `Ecommerce.sol`
+    - [x] Tests exhaustivos del flujo de E-commerce
+    - [x] Script de despliegue para Ecommerce
+    - [x] **Punto de Control:** Subir a rama `feature/ecommerce-sc` e informe de evidencias.
 
 - [ ] **Parte 5: Panel de Administración Web** [ ]
     - [ ] Inicializar app Next.js en `web-admin`

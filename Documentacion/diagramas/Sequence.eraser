@@ -1,0 +1,12 @@
+// Actores
+Comprador [shape: person]
+Ecommerce_SC [icon: cpu]
+CBToken_SC [icon: dollar]
+Vendedor [shape: house]
+
+// Secuencia de Compra
+Comprador > Ecommerce_SC: 1. checkout()
+Ecommerce_SC > CBToken_SC: 2. transferFrom(Comprador, Vendedor, 90%)
+CBToken_SC > Vendedor: 3. Recibe fondos
+Ecommerce_SC > CBToken_SC: 4. transferFrom(Comprador, Vault, 10%)
+Ecommerce_SC > Comprador: 5. Emite Factura SRI

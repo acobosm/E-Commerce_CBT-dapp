@@ -1,0 +1,27 @@
+// Tablas de la Blockchain
+Company [icon: building] {
+  ruc string [pk]
+  name string
+  wallet address
+  establishmentCode string
+  nextInvoiceNumber uint256
+}
+
+Product [icon: package] {
+  id uint256 [pk]
+  name string
+  price_1 uint256
+  stock uint256
+  companyRuc string [fk]
+}
+
+Invoice [icon: file-text] {
+  invoiceId string [pk]
+  companyRuc string [fk]
+  customerWallet address
+  totalAmount uint256
+}
+
+// Relaciones
+Company.ruc 1 <> * Product.companyRuc
+Company.ruc 1 <> * Invoice.companyRuc

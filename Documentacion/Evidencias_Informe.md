@@ -119,6 +119,9 @@ Para esta fase de la aplicación de compra, se han desarrollado los siguientes a
     - `stablecoin/compra-stablecoin/src/app/api/create-payment-intent/route.ts`: Endpoint para iniciar pagos en Stripe.
     - `stablecoin/compra-stablecoin/src/app/api/mint-tokens/route.ts`: Lógica segura que ejecuta el `mint` del Smart Contract tras validar el pago.
 
+4. **Diagrama de Flujo**
+![Adquisición de CBTokens](imagenes/Adquisicion_de_CBTokens.png)
+
 ---
 
 ## 4. Parte 3: Pasarela de Pago con Tokens
@@ -158,18 +161,81 @@ Para garantizar una contabilidad limpia y proteger los fondos de reserva, se ha 
 Se han desarrollado los siguientes archivos para la lógica de pago:
 
 1.  **Lógica y Hooks:**
-    - `stablecoin/pasarela-de-pago/src/hooks/useWeb3.ts`: Gestión de conexión y balance local.
-    - `stablecoin/pasarela-de-pago/src/types/index.d.ts`: Tipados globales para MetaMask.
-2.  **Interfaz de Usuario:**
-    - `stablecoin/pasarela-de-pago/src/components/PaymentProcessor.tsx`: Procesador de pagos con validación de saldo.
-    - `stablecoin/pasarela-de-pago/src/app/page.tsx`: Integración del procesador y consistencia visual.
-3.  **Configuración:**
-    - `stablecoin/pasarela-de-pago/src/app/globals.css`: Estilos premium compartidos.
-    - `stablecoin/pasarela-de-pago/package.json`: Configuración de puerto (6002).
+    - `stablecoin/pasarela-de-pago/src/hooks/useWeb3.ts`: Gestión de conexión y balance local profesional.
+    - `stablecoin/pasarela-de-pago/src/types/index.d.ts`: Tipados globales para compatibilidad con MetaMask.
+2.  **Interfaz de Usuario (Frontend):**
+    - `stablecoin/pasarela-de-pago/src/components/PaymentProcessor.tsx`: Procesador de pagos con validación de saldo en tiempo real.
+    - `stablecoin/pasarela-de-pago/src/app/page.tsx`: Integración del procesador y diseño responsivo.
+3.  **Configuración de Estilos:**
+    - `stablecoin/pasarela-de-pago/src/app/globals.css`: Sistema de diseño premium y animaciones.
+4. **Diagrama de Flujo**
+![Matriz de Roles](imagenes/Matriz_de_Roles_y_Permisos.png)
 
 ---
 
+## 5. Parte 4: Smart Contracts de E-Commerce (SRI Edition)
+
+### Resumen de Arquitectura
+Se ha implementado una solución modular para cumplir con los requisitos del SRI de Ecuador y la lógica de negocio avanzada:
+- **Modularidad:** Uso de librerías (`CompanyLib`, `ProductLib`, `InvoiceLib`, `ClientLib`, `CartLib`) para una gestión eficiente de datos y reducción de costos de gas.
+- **Cumplimiento SRI:** Facturación secuencial por empresa (ej: `001-001-000000001`) y cálculo de IVA segregado (0% y 15%).
+- **Incentivos:** Sistema de cobro de comisiones dinámicas (10% normal, 7% por volumen, 0% VIP).
+
+### Diagramas de Arquitectura
+![Modelo de Datos (ERD)](imagenes/ERD.png)
+![Diagrama de Secuencia Técnica](imagenes/Sequence.png)
+![Ciclo de Ventas y Facturación SRI](imagenes/Ciclo_Ventas_y_Facturacion_modo_SRI.png)
+
+### Archivos Relevantes de la Fase 4
+
+Para tu informe técnico, estos son los archivos principales que componen esta fase:
+
+1.  **Contrato Orquestador:**
+    - `sc-ecommerce/src/Ecommerce.sol`: Contiene toda la lógica de negocio, pagos y facturación.
+2.  **Librerías Modulares (Lógica de Soporte):**
+    - `sc-ecommerce/src/libraries/CompanyLib.sol`: Gestión de empresas y comisiones.
+    - `sc-ecommerce/src/libraries/ProductLib.sol`: Gestión de productos y precios por volumen.
+    - `sc-ecommerce/src/libraries/InvoiceLib.sol`: Generación de datos de facturación SRI.
+3.  **Seguridad y Pruebas:**
+    - `sc-ecommerce/test/Ecommerce.t.sol`: Suite de pruebas que garantiza que no haya errores de dinero o stock.
+4.  **Infraestructura de Despliegue:**
+    - `sc-ecommerce/script/DeployEcommerce.s.sol`: Script para instalar todo en la blockchain.
+    - `sc-ecommerce/foundry.toml`: Configuración técnica para optimizar el contrato.
+
+### Cómo ejecutar los Tests manualmente (Para tu Informe)
+Para capturar las evidencias de funcionamiento de los Smart Contracts, sigue estos pasos:
+
+1.  **Abre una terminal** y navega a la carpeta del contrato:
+    ```bash
+    cd "sc-ecommerce"
+    ```
+2.  **Ejecuta el comando de pruebas:**
+    ```bash
+    forge test -vv
+    ```
+3.  **Captura de Pantalla Sugerida:** Captura la salida de la terminal donde se vean todos los tests marcados como `[PASS]`. Esto demuestra que el contrato es seguro y funcional.
+
+#### Tests Verificados:
+- `testRegisterCompany`: Registro exitoso de RUC y datos de empresa.
+- `testAddProductPermissions`: Validación de roles (Admin vs Vendedor).
+- `testStockSafety`: Protección contra compras superiores al inventario disponible.
+- `testFullPurchaseAndSplit`: Venta completa con cálculo de IVA y reparto automático de fondos (90% al vendedor, 10% a plataforma).
+
+### Cómo Desplegar el Contrato en Anvil (Local)
+
+Para que tu aplicación web pueda hablar con el contrato, primero debes "subirlo" a la blockchain local. Sigue estos pasos:
+
+1.  **Asegúrate de que Anvil esté corriendo** en una terminal aparte.
+2.  **Obtén la dirección de tu CBToken:** Debes tener a mano la dirección que obtuviste al desplegar el token (ej: `0x5Fb...`).
+3.  **Ejecuta el script de despliegue:**
+    ```bash
+    cd "sc-ecommerce"
+    export CBTOKEN_ADDRESS=0x5FbDB2315678afecb367f032d93F642f64180aa3
+    forge script script/DeployEcommerce.s.sol --rpc-url http://localhost:8545 --broadcast
+    ```
+4.  **Captura del Despliegue:** Toma una captura de los logs de la terminal donde diga `Ecommerce deployed at: 0x...`. Esa dirección es la que usaremos más adelante en el Frontend.
+
 ---
 
-> [!TIP]
+> [!IMPORTANT]
 > **Para tu informe:** Te recomiendo tomar capturas de pantalla de tu propia terminal cuando ejecutes el despliegue en Anvil, ya que eso mostrará las direcciones reales que se generen en tu máquina.
