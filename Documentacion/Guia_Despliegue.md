@@ -41,7 +41,9 @@ Comando:
 cd stablecoin/sc
 forge script script/DeployCBToken.s.sol --rpc-url http://localhost:8545 --broadcast
 
-Output importante: Dirección del contrato (ej: 0x5FbDB...)
+Output importante: Dirección del contrato
+(== Return ==
+0: contract CBToken 0x5FbDB2315678afecb367f032d93F642f64180aa3)
 
 Mint inicial: 1,000,000 CBT a la Cuenta 0
 
@@ -54,15 +56,17 @@ export CBTOKEN_ADDRESS=0x5FbDB2315678afecb367f032d93F642f64180aa3  # Usar direcc
 forge script script/DeployEcommerce.s.sol --rpc-url http://localhost:8545 --broadcast
 
 Output importante: Dirección del contrato Ecommerce
+(== Return ==
+0: contract Ecommerce 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0)
 
-# rchivos .env.local a Actualizar:
+# Archivos .env.local a Actualizar:
 
 Después de cada despliegue, actualizar:
 
 1. stablecoin/compra-stablecoin/.env.local
 
 env
-NEXT_PUBLIC_CONTRACT_ADDRESS=0x5FbDB...  # CBToken
+NEXT_PUBLIC_CBTOKEN_ADDRESS=0x5FbDB2315678afecb367f032d93F642f64180aa3  # CBToken
 NEXT_PUBLIC_RPC_URL=http://localhost:8545
 STRIPE_SECRET_KEY=sk_test_...
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...

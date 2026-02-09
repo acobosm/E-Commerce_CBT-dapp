@@ -46,8 +46,9 @@
     - [ ] Flujo de checkout e historial de facturas
     - [ ] **Punto de Control:** Subir a rama `feature/web-customer` y pausar para revisión.
 
-- [ ] **Parte 7: Integración y Funciones Opcionales** [ ]
-    - [ ] Crear script `restart-all.sh`
+- [/] **Parte 7: Integración y Funciones Opcionales** [/]
+    - [x] Crear scripts `restart-all.sh` y `stop-all.sh`
+    - [x] Instalar prerequisito `jq` para parseo de JSON
     - [ ] Implementar soporte multi-moneda (Bonus)
     - [ ] Implementar sistema de reseñas (Bonus)
     - [ ] Implementar recompensas Loyalty/NFT (Bonus)

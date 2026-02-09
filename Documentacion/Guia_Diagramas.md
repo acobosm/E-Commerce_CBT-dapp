@@ -88,7 +88,70 @@ WebAdmin_UI > Admin: 6. Muestra Tabla de Inventario
 
 ---
 
-## 5. Cómo subir esto a GitHub (Tips de Arquitecto)
+## 5. Diagrama de Flujo: Script de Automatización (restart-all.sh)
+
+Este diagrama muestra la lógica de decisión del script maestro de despliegue y arranque de toda la plataforma.
+
+### Código para Eraser (Flowchart Coloreado)
+```eraser
+// Flowchart: restart-all.sh Automation Script
+
+Start [shape: oval, icon: play, color: green]
+Stop_Processes [icon: x-circle, label: "Detener Procesos\n(Anvil, Next.js, tmux)", color: red]
+Start_Anvil [icon: database, label: "Iniciar Anvil\n(con persistencia)", color: blue]
+Wait_Anvil [icon: clock, label: "Esperar\n'Listening on 0.0.0.0:8545'", color: yellow]
+Check_Deployed [shape: diamond, label: "¿Existe\ndeployed-addresses.json?", color: purple]
+Read_Addresses [icon: file-text, label: "Leer Direcciones\ndel JSON", color: cyan]
+Deploy_CBToken [icon: cpu, label: "Desplegar CBToken\n(forge script)", color: orange]
+Deploy_Ecommerce [icon: cpu, label: "Desplegar Ecommerce\n(forge script)", color: orange]
+Save_Addresses [icon: save, label: "Guardar Direcciones\nen JSON", color: cyan]
+Update_Env [icon: settings, label: "Actualizar .env.local\n(3 archivos)", color: blue]
+Start_Tmux [icon: terminal, label: "Iniciar tmux\n(4 paneles 2x2)", color: blue]
+Show_Summary [icon: check-circle, label: "Mostrar Resumen\n(Direcciones + URLs)", color: green]
+End [shape: oval, icon: check, color: green]
+
+// Flujo principal
+Start > Stop_Processes
+Stop_Processes > Start_Anvil
+Start_Anvil > Wait_Anvil
+Wait_Anvil > Check_Deployed
+
+// Rama: Contratos existentes
+Check_Deployed -- "SÍ" --> Read_Addresses
+Read_Addresses > Update_Env
+
+// Rama: Despliegue desde cero
+Check_Deployed -- "NO" --> Deploy_CBToken
+Deploy_CBToken > Deploy_Ecommerce
+Deploy_Ecommerce > Save_Addresses
+Save_Addresses > Update_Env
+
+// Continuación común
+Update_Env > Start_Tmux
+Start_Tmux > Show_Summary
+Show_Summary > End
+```
+
+> [!TIP]
+> ### 🎨 Guía de Colores (Ayuda Memoria)
+> Para mantener la consistencia en tus diagramas, usa este estándar:
+> - 🟢 **Verde (`green`)**: Puntos de inicio y fin exitosos.
+> - 🔴 **Rojo (`red`)**: Acciones de limpieza o detención (procesos que se interrumpen).
+> - 🔵 **Azul (`blue`)**: Configuración de entorno y arranque de servicios o apps.
+> - 🟡 **Amarillo (`yellow`)**: Esperas activas o verificaciones temporales de sistema.
+> - 🟣 **Morado (`purple`)**: Decisiones lógicas o bifurcaciones de flujo (Diamantes).
+> - 🟠 **Naranja (`orange`)**: Despliegue de contratos o interacciones profundas con Blockchain.
+> - 💠 **Cyan (`cyan`)**: Operaciones de archivo (I/O) como lectura/escritura de JSON/Config.
+
+**Puntos Clave del Flujo:**
+- 🔄 **Detección Inteligente:** El script verifica si los contratos ya están desplegados antes de ejecutar `forge script`.
+- ⏱️ **Espera Activa:** No usa `sleep` fijo, sino que detecta cuándo Anvil está listo leyendo el log.
+- 💾 **Persistencia:** Guarda las direcciones en JSON para evitar redespliegues innecesarios.
+- 🛠️ **Automatización Completa:** Actualiza `.env.local` de las 3 apps sin intervención manual.
+
+---
+
+## 6. Cómo subir esto a GitHub (Tips de Arquitecto)
 
 Tienes dos niveles para hacer esto:
 

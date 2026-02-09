@@ -66,11 +66,14 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
                 <div className="p-4 border-t border-border">
                     <div className="flex items-center gap-3 px-2 py-2">
-                        <div className="h-8 w-8 rounded-full bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center text-white font-bold text-xs">
-                            AD
+                        <div className={cn(
+                            "h-8 w-8 rounded-full flex items-center justify-center text-white font-bold text-xs",
+                            isAdmin ? "bg-gradient-to-br from-primary to-purple-600" : "bg-gradient-to-br from-gray-500 to-gray-700"
+                        )}>
+                            {isAdmin ? "AD" : "US"}
                         </div>
                         <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium truncate">Administrador</p>
+                            <p className="text-sm font-medium truncate">{isAdmin ? "Administrador" : "Usuario"}</p>
                             <p className="text-xs text-muted-foreground truncate">
                                 {account ? `${account.substring(0, 6)}...${account.substring(38)}` : "No conectado"}
                             </p>

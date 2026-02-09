@@ -282,3 +282,123 @@ Estos son los archivos que definen la lógica de esta fase:
 3.  **Componentes UI:**
     - `web-admin/src/components/AdminLayout.tsx`: Estructura base con navegación lateral y validación de sesión.
 
+---
+
+## 7. Parte 7 (Parcial): Scripts de Automatización de Despliegue
+
+### Resumen de Implementación
+Se han creado scripts de automatización para facilitar el despliegue y gestión de toda la plataforma E-Commerce. Estos scripts adelantan parcialmente la Fase 7 del proyecto.
+
+### Componentes Desarrollados
+
+1.  **Script de Reinicio Completo (`scripts/restart-all.sh`):**
+    - Detiene procesos anteriores (Anvil, Next.js apps)
+    - Inicia Anvil con persistencia de estado (`e-commerce_state.json`)
+    - Detecta si los contratos ya están desplegados (usando `deployed-addresses.json`)
+    - Si NO existen: Despliega CBToken y Ecommerce automáticamente
+    - Si existen: Reutiliza las direcciones guardadas
+    - Actualiza automáticamente los `.env.local` de las 3 aplicaciones web
+    - Levanta las aplicaciones en una sesión `tmux` con 4 paneles (2x2)
+
+2.  **Script de Detención (`scripts/stop-all.sh`):**
+    - Detiene Anvil, aplicaciones Next.js y sesiones tmux
+    - Verifica que todos los procesos se hayan detenido correctamente
+
+3.  **Persistencia de Estado:**
+    - `e-commerce_state.json`: Guarda el estado completo de la blockchain local
+    - `deployed-addresses.json`: Caché de direcciones de contratos desplegados
+
+### Prerequisito: Instalación de `jq`
+
+El script `restart-all.sh` requiere `jq` para parsear archivos JSON. Instalación:
+
+```bash
+sudo apt-get update && sudo apt-get install -y jq
+```
+
+**Salida esperada:**
+```text
+Reading package lists... Done
+Building dependency tree... Done
+The following NEW packages will be installed:
+  jq libjq1 libonig5
+0 upgraded, 3 newly installed, 0 to remove
+Setting up jq (1.7.1-3ubuntu0.24.04.1) ...
+```
+
+### Cómo Usar los Scripts
+
+#### **Detener todos los servicios:**
+```bash
+./scripts/stop-all.sh
+```
+
+#### **Reiniciar toda la plataforma:**
+```bash
+./scripts/restart-all.sh
+```
+
+**Salida esperada (resumen):**
+```text
+=========================================
+✅ PLATAFORMA E-COMMERCE INICIADA
+=========================================
+
+📦 Contratos Desplegados:
+  - CBToken:   0x5FbDB2315678afecb367f032d93F642f64180aa3
+  - Ecommerce: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0
+
+🌐 Aplicaciones Web:
+  - Compra Stablecoin: http://localhost:6001
+  - Pasarela de Pago:  http://localhost:6002
+  - Panel Admin:       http://localhost:3000
+
+📊 Blockchain:
+  - Anvil RPC: http://localhost:8545
+  - Estado guardado en: e-commerce_state.json
+
+🖥️  Terminal:
+  - Sesión tmux: 'ecommerce'
+  - Ver logs: tmux attach -t ecommerce
+  - Salir de tmux: Ctrl+B, luego D
+```
+
+#### **Ver las terminales de monitoreo:**
+```bash
+tmux attach -t ecommerce
+```
+
+**Distribución de paneles (2x2):**
+```
+┌─────────────┬─────────────┐
+│   Anvil     │  Compra CBT │
+│   (log)     │  (npm dev)  │
+├─────────────┼─────────────┤
+│  Pasarela   │  Web Admin  │
+│  (npm dev)  │  (npm dev)  │
+└─────────────┴─────────────┘
+```
+
+### Archivos Relevantes de la Fase 7 (Parcial)
+
+1.  **Scripts de Automatización:**
+    - `scripts/restart-all.sh`: Script maestro de despliegue y arranque
+    - `scripts/stop-all.sh`: Script de detención de servicios
+2.  **Archivos de Estado:**
+    - `deployed-addresses.json`: Caché de direcciones de contratos
+    - `e-commerce_state.json`: Estado persistente de Anvil
+3.  **Logs:**
+    - `logs/anvil.log`: Salida de Anvil
+    - `logs/compra-stablecoin.log`: Salida de la app de compra
+    - `logs/pasarela-de-pago.log`: Salida de la pasarela
+    - `logs/web-admin.log`: Salida del panel admin
+
+### Notas Importantes
+
+- ⚠️  **Fase 6 pendiente:** Cuando se implemente `web-customer`, se añadirá una segunda pestaña en tmux para su monitoreo.
+- 💾 **Persistencia:** Mientras exista `e-commerce_state.json`, las direcciones de contratos no cambiarán entre reinicios.
+- 🔄 **Fresh Start:** Para redesplegar desde cero, eliminar `e-commerce_state.json` y `deployed-addresses.json`.
+
+### Diagrama de Flujo del Script de Automatización
+![Flujo de restart-all.sh](imagenes/Restart_Script_Flowchart.png)
+

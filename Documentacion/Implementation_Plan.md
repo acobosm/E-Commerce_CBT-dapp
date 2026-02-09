@@ -81,6 +81,124 @@ El objetivo era crear una aplicación independiente que sirva como procesador de
 
 ---
 
-## 🛒 Próximas Fases:
-- **Parte 4:** Smart Contracts de E-Commerce (Lógica de Negocio) (Siguiente Paso).
-- **Parte 5 & 6:** Paneles Web (Admin y Cliente).
+## 🏪 Parte 4: Smart Contracts de E-Commerce (Completado)
+
+Implementación de la lógica de negocio completa del marketplace descentralizado con cumplimiento normativo ecuatoriano (SRI).
+
+### Arquitectura Modular
+- [x] **Librerías Especializadas**: 
+  - `CompanyLib.sol`: Gestión de empresas y comisiones dinámicas.
+  - `ProductLib.sol`: Catálogo y precios por volumen.
+  - `InvoiceLib.sol`: Generación de facturas con formato SRI.
+  - `ClientLib.sol`: Datos de facturación del comprador.
+  - `CartLib.sol`: Gestión de carrito on-chain.
+
+### Contrato Principal: Ecommerce.sol
+- [x] **Orquestación de Pagos**: Split automático 90% vendedor / 10% plataforma.
+- [x] **Cumplimiento SRI**: Facturación secuencial por empresa (formato `001-001-000000001`).
+- [x] **Cálculo de IVA**: Segregación de productos con IVA 0% y 15%.
+- [x] **Control de Acceso**: Roles diferenciados (Admin, Vendedor, Cliente).
+
+### Calidad y Pruebas
+- [x] **Tests Exhaustivos** (`Ecommerce.t.sol`):
+  - `testRegisterCompany`: Registro exitoso de RUC y datos de empresa.
+  - `testAddProductPermissions`: Validación de roles (Admin vs Vendedor).
+  - `testStockSafety`: Protección contra compras superiores al inventario disponible.
+  - `testFullPurchaseAndSplit`: Venta completa con cálculo de IVA y reparto automático de fondos.
+
+### Script de Despliegue
+- [x] **DeployEcommerce.s.sol**: Script parametrizado que recibe la dirección de CBToken como variable de entorno.
+
+---
+
+## 🔐 Parte 5: Panel de Administración Web (Completado)
+
+Desarrollo del backend administrativo con seguridad por roles (RBAC on-chain) y UX avanzada basada en eventos de blockchain.
+
+### Componentes Clave Desarrollados
+
+#### 1. Seguridad por Roles
+- [x] **Verificación On-Chain**: El panel verifica en tiempo real si la wallet conectada es el `owner()` del contrato.
+- [x] **Barreras Visuales**: Pantalla roja de "Acceso Denegado" para usuarios no autorizados.
+- [x] **Indicador Dinámico de Rol**: Badge que muestra "Administrador" (AD) o "Usuario" (US) según permisos.
+
+#### 2. Gestión de Empresas
+- [x] **Registro de RUCs**: Formulario para dar de alta nuevas empresas en el sistema.
+- [x] **Consulta de Estado**: Visualización de empresas registradas.
+
+#### 3. Gestión de Productos
+- [x] **Dropdown Dinámico**: Lectura de eventos `CompanyRegistered` para poblar selector de empresas.
+- [x] **Formulario de Creación**: Alta de productos con validación de campos.
+- [x] **Inventario en Tiempo Real**: Tabla que reconstruye el stock leyendo eventos `ProductAdded` históricos y consultando el estado actual con `contract.products(id)`.
+
+#### 4. Auditoría de Facturas
+- [x] **Visualizador de Facturas**: Módulo preparado para consultar documentos por clave compuesta (RUC + Secuencial).
+
+#### 5. UI Premium
+- [x] **Diseño**: Glassmorphism + Dark Mode.
+- [x] **Navegación**: Sidebar con indicadores de sección activa.
+- [x] **Responsividad**: Layout adaptable a móviles y escritorio.
+
+### Diagrama de Arquitectura
+- [x] **Diagrama de Secuencia**: Flujo de lectura de eventos para reconstruir inventario sin gastar gas.
+
+---
+
+## 🛒 Parte 6: Tienda Web para Clientes (Pendiente)
+
+**Estado:** No iniciado. Esta será la siguiente fase de desarrollo.
+
+### Funcionalidades Planificadas
+- [ ] Inicializar app Next.js en `web-customer` (Puerto 6003).
+- [ ] Catálogo público de productos con filtros y búsqueda.
+- [ ] Gestión de carrito de compras (on-chain).
+- [ ] Flujo de checkout con integración a `Ecommerce.sol`.
+- [ ] Historial de facturas del cliente.
+- [ ] UI consistente con el diseño premium de las apps existentes.
+
+---
+
+## ⚙️ Parte 7: Integración y Automatización (Parcialmente Completado)
+
+**Estado:** Scripts de automatización implementados. Funciones opcionales pendientes.
+
+### Completado ✅
+
+#### Scripts de Automatización
+- [x] **`restart-all.sh`**: Script maestro que automatiza todo el proceso de despliegue y arranque:
+  - Limpieza de procesos anteriores (Anvil, Next.js apps, tmux).
+  - Inicio de Anvil con persistencia de estado (`e-commerce_state.json`).
+  - Detección inteligente de contratos existentes (`deployed-addresses.json`).
+  - Despliegue automático de CBToken y Ecommerce si no existen.
+  - Actualización automática de `.env.local` en las 3 aplicaciones web.
+  - Inicio de servicios en sesión tmux con 4 paneles (2x2): Anvil log, Compra CBT, Pasarela, Admin.
+
+- [x] **`stop-all.sh`**: Script de detención limpia de todos los servicios con verificación de procesos.
+
+#### Prerequisitos
+- [x] **Instalación de `jq`**: Herramienta para parseo de JSON requerida por `restart-all.sh`.
+  ```bash
+  sudo apt-get update && sudo apt-get install -y jq
+  ```
+
+#### Persistencia de Estado
+- [x] **`e-commerce_state.json`**: Configuración de Anvil para guardar el estado completo de la blockchain local.
+- [x] **`deployed-addresses.json`**: Caché de direcciones de contratos desplegados para evitar redespliegues innecesarios.
+
+#### Gestión de Logs
+- [x] **Carpeta `logs/`**: Centralización de logs de todos los servicios.
+- [x] **`.gitignore`**: Actualizado para excluir logs y estado de Anvil.
+
+### Pendiente ⏳
+- [ ] Implementar soporte multi-moneda (Bonus).
+- [ ] Implementar sistema de reseñas de productos (Bonus).
+- [ ] Implementar recompensas Loyalty/NFT (Bonus).
+
+---
+
+## 📝 Próximas Fases
+
+1. **Parte 6:** Tienda Web para Clientes (Siguiente paso inmediato).
+2. **Parte 7:** Completar funciones opcionales (Bonus).
+3. **Parte 8:** Revisión final y documentación completa.
+4. **Parte 9:** Preparación de video demostrativo.

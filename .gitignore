@@ -3,6 +3,12 @@ out/
 cache/
 broadcast/
 
+# Anvil State
+e-commerce_state.json
+
+# Directorio de logs
+logs/
+
 # Dependencias de Node (web-admin, web-customer)
 node_modules/
 .next/
