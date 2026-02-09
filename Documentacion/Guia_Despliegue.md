@@ -59,7 +59,7 @@ Output importante: Dirección del contrato Ecommerce
 (== Return ==
 0: contract Ecommerce 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0)
 
-# Archivos .env.local a Actualizar:
+# Archivos .env.local a Actualizar :
 
 Después de cada despliegue, actualizar:
 
