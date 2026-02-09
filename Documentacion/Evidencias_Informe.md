@@ -239,3 +239,46 @@ Para que tu aplicación web pueda hablar con el contrato, primero debes "subirlo
 
 > [!IMPORTANT]
 > **Para tu informe:** Te recomiendo tomar capturas de pantalla de tu propia terminal cuando ejecutes el despliegue en Anvil, ya que eso mostrará las direcciones reales que se generen en tu máquina.
+
+---
+
+## 6. Parte 5: Panel de Administración Web (Seguridad y Gestión)
+
+### Resumen de Implementación
+Se ha completado el desarrollo del Backend Administrativo (`web-admin`) en el puerto 3000, diseñado con una estética "Premium" (Glassmorphism + Dark Mode) y controles de seguridad estrictos.
+
+### Componentes Clave Desarrollados
+1.  **Seguridad por Roles (RBAC On-Chain):**
+    - Implementación de barreras visuales y lógicas para restringir el acceso.
+    - El panel verifica en tiempo real si la wallet conectada es el `owner()` del contrato.
+    - **Resultado:** Si un usuario no autorizado (Cuenta 2) intenta acceder a `/products` o `/invoices`, se muestra una pantalla roja de "Acceso Denegado". Solo la Cuenta 0 puede operar.
+
+2.  **UX Avanzada con Eventos de Blockchain:**
+    - **Dropdown Dinámico de Empresas:** En lugar de memorizar RUCs, el sistema lee el historial de eventos `CompanyRegistered` y muestra una lista amigable para selección rápida.
+    - **Inventario en Tiempo Real:** Al seleccionar una empresa, una segunda consulta a eventos `ProductAdded` reconstruye y muestra la tabla de productos existentes debajo del formulario.
+
+3.  **Auditoría de Transacciones:**
+    - Módulo de Facturación (`/invoices`) preparado para consultar documentos por clave compuesta (RUC + Secuencial).
+
+4.  **Diagrama de Secuencia (Lectura de Eventos):**
+    ![Diagrama de Secuencia Admin](imagenes/Admin_Web_sequence.png)
+
+### Capturas de Pantalla Sugeridas
+Para tu informe final, te recomendamos tomar las siguientes capturas navegando en `http://localhost:3000`:
+
+1.  **Dashboard:** Vista principal con el indicador "Admin Verificado" en verde.
+2.  **Gestión de Producto:** Captura del formulario con una empresa seleccionada y la tabla de inventario visible abajo.
+3.  **Bloqueo de Seguridad:** Captura intentando entrar con una cuenta no autorizada (pantalla roja de alerta).
+
+### Archivos Relevantes de la Fase 5
+Estos son los archivos que definen la lógica de esta fase:
+
+1.  **Páginas Principales:**
+    - `web-admin/src/app/companies/page.tsx`: Registro de RUCs y consulta de estado.
+    - `web-admin/src/app/products/page.tsx`: Gestión de catálogo con lectura de eventos históricos.
+    - `web-admin/src/app/invoices/page.tsx`: Visualizador de facturas electrónicas.
+2.  **Lógica Reutilizable:**
+    - `web-admin/src/hooks/useWeb3.ts`: Hook centralizado para conexión y validación de permisos de admin.
+3.  **Componentes UI:**
+    - `web-admin/src/components/AdminLayout.tsx`: Estructura base con navegación lateral y validación de sesión.
+

@@ -34,11 +34,11 @@
     - [x] Script de despliegue para Ecommerce
     - [x] **Punto de Control:** Subir a rama `feature/ecommerce-sc` e informe de evidencias.
 
-- [ ] **Parte 5: Panel de Administración Web** [ ]
-    - [ ] Inicializar app Next.js en `web-admin`
-    - [ ] Registro de empresas y gestión de productos
-    - [ ] Visualización y filtrado de facturas
-    - [ ] **Punto de Control:** Subir a rama `feature/web-admin` y pausar para revisión.
+- [x] **Parte 5: Panel de Administración Web** [x]
+    - [x] Inicializar app Next.js en `web-admin` (Puerto 3000)
+    - [x] Registro de empresas y gestión de productos
+    - [x] Visualización y filtrado de facturas
+    - [x] **Punto de Control:** Subir a rama `feature/web-admin` y pausar para revisión.
 
 - [ ] **Parte 6: Tienda Web para Clientes** [ ]
     - [ ] Inicializar app Next.js en `web-customer`

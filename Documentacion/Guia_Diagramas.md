@@ -10,7 +10,7 @@ En Blockchain, el "ERD" representa cómo se estructuran los `structs` y `mapping
 // Tablas de la Blockchain
 Company [icon: building] {
   ruc string [pk]
-  name string
+  name     
   wallet address
   establishmentCode string
   nextInvoiceNumber uint256
@@ -66,7 +66,29 @@ Esto lo aplicaremos en la siguiente fase. Dibujaremos el esqueleto de:
 
 ---
 
-## 4. Cómo subir esto a GitHub (Tips de Arquitecto)
+## 4. Diagrama de Secuencia: Admin Web (Lectura de Eventos)
+Este es el mecanismo "Pro" que usamos para listar productos sin gastar gas, leyendo el historial de la Blockchain.
+
+### Código para Eraser (Sequence as Code)
+```eraser
+// Actores
+Admin [shape: person]
+WebAdmin_UI [icon: monitor]
+Blockchain_Logs [icon: database]
+Smart_Contract [icon: cpu]
+
+// Flujo: Carga de Productos
+Admin > WebAdmin_UI: 1. Selecciona Empresa (Dropdown)
+WebAdmin_UI > Blockchain_Logs: 2. queryFilter(ProductAdded)
+Blockchain_Logs > WebAdmin_UI: 3. Retorna Array de Eventos [id, name, ... ]
+WebAdmin_UI > Smart_Contract: 4. products(id) [Para validar estado actual]
+Smart_Contract > WebAdmin_UI: 5. Retorna { stock, price, active }
+WebAdmin_UI > Admin: 6. Muestra Tabla de Inventario
+```
+
+---
+
+## 5. Cómo subir esto a GitHub (Tips de Arquitecto)
 
 Tienes dos niveles para hacer esto:
 
