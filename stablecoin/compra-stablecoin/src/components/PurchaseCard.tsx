@@ -78,6 +78,12 @@ export default function PurchaseCard() {
                 >
                     Nueva Compra
                 </button>
+                <button
+                    onClick={() => window.close()}
+                    className="w-full py-3 px-4 mt-3 bg-transparent border border-slate-700 hover:bg-slate-800 text-slate-400 hover:text-white font-semibold rounded-lg transition-all flex items-center justify-center gap-2"
+                >
+                    <Briefcase className="h-4 w-4" /> Volver al Comercio
+                </button>
             </div>
         );
     }

@@ -1,0 +1,385 @@
+{
+  "companies": [
+    {
+      "_comment": "Vendedor Sung",
+      "ruc": "1792101601001",
+      "name": "Alpha Corp",
+      "wallet_index": 7,
+      "email": "info@alphacorp.com",
+      "description": "Lideres en tecnologia y gadgets.",
+      "phone": "0999888777",
+      "streets": "Av. Amazonas y Av. Japon",
+      "products": [
+        {
+          "name": "Adaptador NVME SSD USB 3.1",
+          "price": 1698,
+          "stock": 10,
+          "iva": 15,
+          "photos": [
+            "/images/Adaptador_NVME_SSD_USB_3.1_01.png",
+            "/images/Adaptador_NVME_SSD_USB_3.1_02.png",
+            "/images/Adaptador_NVME_SSD_USB_3.1_03.png",
+            "/images/Adaptador_NVME_SSD_USB_3.1_04.png"
+          ]
+        },
+        {
+          "name": "Disco SSD 1TB Crucial PCIe Gen4",
+          "price": 16494,
+          "stock": 10,
+          "iva": 15,
+          "photos": [
+            "/images/Disco_SSD_1TB_Crucial_PCIe_Gen4_01.png",
+            "/images/Disco_SSD_1TB_Crucial_PCIe_Gen4_02.png",
+            "/images/Disco_SSD_1TB_Crucial_PCIe_Gen4_03.png",
+            "/images/Disco_SSD_1TB_Crucial_PCIe_Gen4_04.png"
+          ]
+        },
+        {
+          "name": "Monitor Sceptre 27pulg",
+          "price": 9497,
+          "stock": 10,
+          "iva": 15,
+          "photos": [
+            "/images/Monitor_sceptre_27pulg_01.png",
+            "/images/Monitor_sceptre_27pulg_02.png",
+            "/images/Monitor_sceptre_27pulg_03.png",
+            "/images/Monitor_sceptre_27pulg_04.png"
+          ]
+        }
+      ]
+    },
+    {
+      "_comment": "Vendedor Akira",
+      "ruc": "1792101602001",
+      "name": "Muse Box",
+      "wallet_index": 8,
+      "email": "ventas@musebox.com",
+      "description": "Instrumentos musicales de calidad.",
+      "phone": "0999555444",
+      "streets": "Calle de la Moda 55",
+      "products": [
+        {
+          "name": "Bajo 5 cuerdas Ibanez",
+          "price": 29999,
+          "stock": 10,
+          "iva": 15,
+          "photos": [
+            "/images/Bajo_5_cuerdas_Ibanez_01.png",
+            "/images/Bajo_5_cuerdas_Ibanez_02.png",
+            "/images/Bajo_5_cuerdas_Ibanez_03.png",
+            "/images/Bajo_5_cuerdas_Ibanez_04.png"
+          ]
+        },
+        {
+          "name": "Bateria Electronica ALESIS Nitro Pro",
+          "price": 70127,
+          "stock": 6,
+          "iva": 15,
+          "photos": [
+            "/images/Bateria_Electronica_ALESIS_Nitro_Pro_01.png",
+            "/images/Bateria_Electronica_ALESIS_Nitro_Pro_02.png",
+            "/images/Bateria_Electronica_ALESIS_Nitro_Pro_03.png",
+            "/images/Bateria_Electronica_ALESIS_Nitro_Pro_04.png"
+          ]
+        },
+        {
+          "name": "Teclado KORG EK50",
+          "price": 49999,
+          "stock": 5,
+          "iva": 15,
+          "photos": [
+            "/images/Teclado_KORG_EK50_01.png",
+            "/images/Teclado_KORG_EK50_02.png",
+            "/images/Teclado_KORG_EK50_03.png",
+            "/images/Teclado_KORG_EK50_04.png"
+          ]
+        }
+      ]
+    },
+    {
+      "_comment": "Vendedor Samantha",
+      "ruc": "1792101603001",
+      "name": "STFitness",
+      "wallet_index": 9,
+      "email": "contacto@stfitness.com",
+      "description": "Productos para vida Fitness.",
+      "phone": "0999333222",
+      "streets": "Parque Chino",
+      "products": [
+        {
+          "name": "Banco de Pesas FLYBIRD 800lbs",
+          "price": 14998,
+          "stock": 10,
+          "iva": 15,
+          "photos": [
+            "/images/Banco_de_Pesas_FLYBIRD_800lbs_01.png",
+            "/images/Banco_de_Pesas_FLYBIRD_800lbs_02.png",
+            "/images/Banco_de_Pesas_FLYBIRD_800lbs_03.png",
+            "/images/Banco_de_Pesas_FLYBIRD_800lbs_04.png"
+          ]
+        },
+        {
+          "name": "Mancuernas 5Lbs",
+          "price": 1699,
+          "stock": 30,
+          "iva": 15,
+          "photos": [
+            "/images/Mancuernas_5Lbs_01.png",
+            "/images/Mancuernas_5Lbs_02.png",
+            "/images/Mancuernas_5Lbs_03.png",
+            "/images/Mancuernas_5Lbs_04.png"
+          ]
+        },
+        {
+          "name": "Mat Yoga YOTTOY",
+          "price": 2222,
+          "stock": 10,
+          "iva": 15,
+          "photos": [
+            "/images/Mat_Yoga_YOTTOY_01.png",
+            "/images/Mat_Yoga_YOTTOY_02.png",
+            "/images/Mat_Yoga_YOTTOY_03.png",
+            "/images/Mat_Yoga_YOTTOY_04.png"
+          ]
+        }
+      ]
+    },
+    {
+      "_comment": "Vendedor Marketplace",
+      "ruc": "1792101604001",
+      "name": "CBT Marketplace",
+      "wallet_index": 1,
+      "email": "pedidos@cbtmarketplace.com",
+      "description": "Plataforma de comercio electronico.",
+      "phone": "0999111000",
+      "streets": "Av. Emilio Romero Menendez y Av. Pedro Valverde Alvarez",
+      "products": [
+        {
+          "name": "Kit para hornear 6 piezas",
+          "price": 1497,
+          "stock": 10,
+          "iva": 0,
+          "photos": [
+            "/images/Kit_para_hornear_6piezas_01.png",
+            "/images/Kit_para_hornear_6piezas_02.png",
+            "/images/Kit_para_hornear_6piezas_03.png",
+            "/images/Kit_para_hornear_6piezas_04.png"
+          ]
+        },
+        {
+          "name": "Olla lenta Ninja",
+          "price": 10999,
+          "stock": 5,
+          "iva": 0,
+          "photos": [
+            "/images/Olla_lenta_Ninja_01.png",
+            "/images/Olla_lenta_Ninja_02.png",
+            "/images/Olla_lenta_Ninja_03.png",
+            "/images/Olla_lenta_Ninja_04.png"
+          ]
+        },
+        {
+          "name": "Kit Sushi FUNGYAND",
+          "price": 3199,
+          "stock": 10,
+          "iva": 0,
+          "photos": [
+            "/images/Sushi_kit_FUNGYAND_01.png",
+            "/images/Sushi_kit_FUNGYAND_02.png",
+            "/images/Sushi_kit_FUNGYAND_03.png",
+            "/images/Sushi_kit_FUNGYAND_04.png"
+          ]
+        }
+      ]
+    }
+  ],
+  "clients": [
+    {
+      "name": "Bob Dylan",
+      "idNumber": "1720000002",
+      "wallet_index": 2,
+      "initial_cbt": 800,
+      "phone": "0991112222",
+      "email": "bob.dylan@test.com",
+      "street": "Av. Amazonas y Orellana"
+    },
+    {
+      "name": "Carol Danvers",
+      "idNumber": "1720000003",
+      "wallet_index": 3,
+      "initial_cbt": 700,
+      "phone": "0993334444",
+      "email": "carol.danvers@test.com",
+      "street": "Via a la Costa Km 10"
+    },
+    {
+      "name": "Aura Fraser",
+      "idNumber": "1720000004",
+      "wallet_index": 4,
+      "initial_cbt": 1000,
+      "phone": "0995556666",
+      "email": "aura.fraser@test.com",
+      "street": "La Floresta, Sevilla N24"
+    },
+    {
+      "name": "Leslie Campcastlle",
+      "idNumber": "1720000005",
+      "wallet_index": 5,
+      "initial_cbt": 1800,
+      "phone": "0997778888",
+      "email": "leslie.campcastlle@test.com",
+      "street": "Cumbaya, San Francisco"
+    },
+    {
+      "name": "Tony Corlleone",
+      "idNumber": "1720000006",
+      "wallet_index": 6,
+      "initial_cbt": 2500,
+      "phone": "0999990000",
+      "email": "tony.corlleone@test.com",
+      "street": "Cdla. Kennedy, Calle 5ta"
+    }
+  ],
+  "purchases": [
+    {
+      "_note": "Tony Corlleone (C6) - Muse Box",
+      "client_index": 6,
+      "company_ruc": "1792101602001",
+      "product_index": 1,
+      "quantity": 1
+    },
+    {
+      "_note": "Tony Corlleone (C6) - Muse Box",
+      "client_index": 6,
+      "company_ruc": "1792101602001",
+      "product_index": 2,
+      "quantity": 1
+    },
+    {
+      "_note": "Tony Corlleone (C6) - Alpha Corp",
+      "client_index": 6,
+      "company_ruc": "1792101601001",
+      "product_index": 2,
+      "quantity": 1
+    },
+    {
+      "_note": "Tony Corlleone (C6) - CBT Marketplace",
+      "client_index": 6,
+      "company_ruc": "1792101604001",
+      "product_index": 1,
+      "quantity": 2
+    },
+    {
+      "_note": "Leslie Campcastlle (C5) - CBT Marketplace",
+      "client_index": 5,
+      "company_ruc": "1792101604001",
+      "product_index": 0,
+      "quantity": 1
+    },
+    {
+      "_note": "Leslie Campcastlle (C5) - STFitness",
+      "client_index": 5,
+      "company_ruc": "1792101603001",
+      "product_index": 1,
+      "quantity": 1
+    },
+    {
+      "_note": "Leslie Campcastlle (C5) - STFitness",
+      "client_index": 5,
+      "company_ruc": "1792101603001",
+      "product_index": 2,
+      "quantity": 1
+    },
+    {
+      "_note": "Leslie Campcastlle (C5) - Alpha Corp",
+      "client_index": 5,
+      "company_ruc": "1792101601001",
+      "product_index": 2,
+      "quantity": 1
+    },
+    {
+      "_note": "Aura Fraser (C4) - Alpha Corp",
+      "client_index": 4,
+      "company_ruc": "1792101601001",
+      "product_index": 0,
+      "quantity": 1
+    },
+    {
+      "_note": "Aura Fraser (C4) - Alpha Corp",
+      "client_index": 4,
+      "company_ruc": "1792101601001",
+      "product_index": 1,
+      "quantity": 1
+    },
+    {
+      "_note": "Aura Fraser (C4) - Muse Box",
+      "client_index": 4,
+      "company_ruc": "1792101602001",
+      "product_index": 0,
+      "quantity": 1
+    },
+    {
+      "_note": "Aura Fraser (C4) - STFitness",
+      "client_index": 4,
+      "company_ruc": "1792101603001",
+      "product_index": 0,
+      "quantity": 1
+    },
+    {
+      "_note": "Aura Fraser (C4) - CBT Marketplace",
+      "client_index": 4,
+      "company_ruc": "1792101604001",
+      "product_index": 2,
+      "quantity": 1
+    },
+    {
+      "_note": "Carol Danvers (C3) - STFitness",
+      "client_index": 3,
+      "company_ruc": "1792101603001",
+      "product_index": 2,
+      "quantity": 1
+    },
+    {
+      "_note": "Carol Danvers (C3) - STFitness",
+      "client_index": 3,
+      "company_ruc": "1792101603001",
+      "product_index": 1,
+      "quantity": 2
+    },
+    {
+      "_note": "Carol Danvers (C3) - CBT Marketplace",
+      "client_index": 3,
+      "company_ruc": "1792101604001",
+      "product_index": 2,
+      "quantity": 2
+    },
+    {
+      "_note": "Bob Dylan (C2) - Alpha Corp",
+      "client_index": 2,
+      "company_ruc": "1792101601001",
+      "product_index": 0,
+      "quantity": 2
+    },
+    {
+      "_note": "Bob Dylan (C2) - Alpha Corp",
+      "client_index": 2,
+      "company_ruc": "1792101601001",
+      "product_index": 1,
+      "quantity": 2
+    },
+    {
+      "_note": "Bob Dylan (C2) - STFitness",
+      "client_index": 2,
+      "company_ruc": "1792101603001",
+      "product_index": 0,
+      "quantity": 1
+    },
+    {
+      "_note": "Bob Dylan (C2) - CBT Marketplace",
+      "client_index": 2,
+      "company_ruc": "1792101604001",
+      "product_index": 1,
+      "quantity": 1
+    }
+  ]
+}

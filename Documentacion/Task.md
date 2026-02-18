@@ -40,15 +40,19 @@
     - [x] Visualización y filtrado de facturas
     - [x] **Punto de Control:** Subir a rama `feature/web-admin` y pausar para revisión.
 
-- [ ] **Parte 6: Tienda Web para Clientes** [ ]
-    - [ ] Inicializar app Next.js en `web-customer`
-    - [ ] Catálogo de productos y gestión del carrito
-    - [ ] Flujo de checkout e historial de facturas
-    - [ ] **Punto de Control:** Subir a rama `feature/web-customer` y pausar para revisión.
+- [x] **Parte 6: Tienda Web para Clientes** [x]
+    - [x] Inicializar app Next.js en `web-customer` (Layout Premium & Glassmorphism)
+    - [x] Configurar `Navbar` como Client Component (Solución de error Server/Client)
+    - [x] Catálogo de productos y gestión del carrito (Catálogo funcional)
+    - [x] Flujo de checkout e historial de facturas
+    - [x] **Punto de Control:** Subir a rama `feature/web-customer` e informe de evidencias.
 
-- [/] **Parte 7: Integración y Funciones Opcionales** [/]
+- [x] **Parte 7: Integración y Funciones Opcionales** [x]
     - [x] Crear scripts `restart-all.sh` y `stop-all.sh`
     - [x] Instalar prerequisito `jq` para parseo de JSON
+    - [x] **Sistema de Simulación:** Carga vía `seed-data.json` y `SeedSimulation.s.sol`
+    - [x] **Sincronización Automática:** Lógica de corrección de billeteras vía `updateCompanyWallet`
+    - [x] **Contabilidad:** Reporte automático `logs/accounting.csv` vía events
     - [ ] Implementar soporte multi-moneda (Bonus)
     - [ ] Implementar sistema de reseñas (Bonus)
     - [ ] Implementar recompensas Loyalty/NFT (Bonus)

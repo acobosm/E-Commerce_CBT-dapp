@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "CBToken Store | CodeCrypto Academy",
+  title: "CBT Market | Token Store",
   description: "Compra CBTokens con tarjeta de crédito de forma fácil y segura.",
 };
 

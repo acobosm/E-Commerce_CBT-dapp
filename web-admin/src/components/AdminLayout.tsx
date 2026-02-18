@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useWeb3 } from "@/hooks/useWeb3";
 import { Button } from "@/components/ui/Button";
+import Image from "next/image";
 import {
     LayoutDashboard,
     Building2,
@@ -41,9 +42,17 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         <div className="min-h-screen bg-background text-foreground flex">
             {/* Sidebar for Desktop */}
             <aside className="hidden md:flex w-64 flex-col border-r border-border bg-card/50 backdrop-blur-xl fixed inset-y-0 left-0 z-50">
-                <div className="h-16 flex items-center px-6 border-b border-border">
-                    <ShieldCheck className="h-6 w-6 text-primary mr-2" />
-                    <span className="font-bold text-lg tracking-wider">ECOMMERCE ADMIN</span>
+                <div className="h-16 flex items-center px-6 border-b border-border gap-3">
+                    <div className="relative h-8 w-24 flex items-center justify-start">
+                        <Image
+                            src="/logo-cbt.png"
+                            alt="CBT Logo"
+                            width={96}
+                            height={32}
+                            className="object-contain object-left"
+                            priority
+                        />
+                    </div>
                 </div>
 
                 <nav className="flex-1 py-6 px-4 space-y-2">
