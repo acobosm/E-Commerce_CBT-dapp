@@ -38,4 +38,26 @@ library CartLib {
     function clear(Cart storage cart) internal {
         delete cart.items;
     }
+
+    /**
+     * @dev Reduce la cantidad de un producto o lo elimina si la cantidad es total.
+     */
+    function removeItem(
+        Cart storage cart,
+        uint256 productId,
+        uint256 quantity
+    ) internal {
+        for (uint i = 0; i < cart.items.length; i++) {
+            if (cart.items[i].productId == productId) {
+                if (cart.items[i].quantity <= quantity) {
+                    // Eliminar item (Swap & Pop)
+                    cart.items[i] = cart.items[cart.items.length - 1];
+                    cart.items.pop();
+                } else {
+                    cart.items[i].quantity -= quantity;
+                }
+                return;
+            }
+        }
+    }
 }

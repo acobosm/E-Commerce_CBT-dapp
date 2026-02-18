@@ -132,6 +132,24 @@ contract Ecommerce {
         emit CompanyRegistered(_ruc, _name, _wallet);
     }
 
+    function updateCompanyWallet(
+        string memory _ruc,
+        address _newWallet
+    ) external onlyOwner {
+        require(bytes(companies[_ruc].ruc).length > 0, "Empresa no registrada");
+        address oldWallet = companies[_ruc].wallet;
+
+        // Limpiar mapeo antiguo si existía
+        if (oldWallet != address(0)) {
+            delete walletToRuc[oldWallet];
+        }
+
+        companies[_ruc].wallet = _newWallet;
+        walletToRuc[_newWallet] = _ruc;
+
+        emit CompanyRegistered(_ruc, companies[_ruc].name, _newWallet);
+    }
+
     // --- Gestion de Catalogo ---
     function addProduct(
         string memory _ruc,
@@ -156,13 +174,56 @@ contract Ecommerce {
         emit ProductAdded(id, _name, _ruc);
     }
 
+    /**
+     * @dev Permite al Administrador o a la empresa dueña actualizar metadatos del producto.
+     * No permite actualizar el stock (usar buyStock para eso).
+     */
+    function updateProduct(
+        uint256 _id,
+        string memory _name,
+        string[4] memory _photos,
+        uint256 _price_1,
+        uint8 _iva,
+        bool _isActive
+    ) external {
+        ProductLib.Product storage prod = products[_id];
+        require(prod.price_1 > 0, "Producto no existe");
+
+        bool isCompanyOwner = keccak256(bytes(walletToRuc[msg.sender])) ==
+            keccak256(bytes(prod.companyRuc));
+        bool isAdmin = msg.sender == owner;
+
+        require(isAdmin || isCompanyOwner, "No tienes permisos para editar");
+
+        prod.name = _name;
+        prod.price_1 = _price_1;
+        prod.price_2 = (_price_1 * 95) / 100;
+        prod.price_3 = (_price_1 * 85) / 100;
+        prod.iva = _iva;
+        prod.isActive = _isActive;
+
+        // Solo la empresa dueña puede cambiar las fotos
+        if (isCompanyOwner) {
+            prod.photos = _photos;
+        }
+    }
+
+    function getProductPhotos(
+        uint256 _id
+    ) external view returns (string[4] memory) {
+        return products[_id].photos;
+    }
+
     function buyStock(uint256 _productId, uint256 _amount) external {
         ProductLib.Product storage product = products[_productId];
         require(product.isActive, "Producto inactivo");
         string memory ruc = product.companyRuc;
         require(
-            keccak256(bytes(walletToRuc[msg.sender])) == keccak256(bytes(ruc)),
-            unicode"Solo la empresa dueña puede reponer stock"
+            msg.sender == owner ||
+                msg.sender == platformVault ||
+                keccak256(bytes(walletToRuc[msg.sender])) ==
+                keccak256(bytes(ruc)),
+            unicode"No tienes permisos para reponer stock"
         );
 
         product.stock += _amount;
@@ -197,6 +258,14 @@ contract Ecommerce {
         carts[msg.sender].addItem(_productId, _quantity);
     }
 
+    function removeFromCart(uint256 _productId, uint256 _quantity) external {
+        carts[msg.sender].removeItem(_productId, _quantity);
+    }
+
+    function clearCart() external {
+        carts[msg.sender].clear();
+    }
+
     function getCartItems() external view returns (CartLib.CartItem[] memory) {
         return carts[msg.sender].items;
     }
@@ -209,18 +278,11 @@ contract Ecommerce {
             "Debe registrar sus datos como cliente primero"
         );
 
-        // Procesar por empresa (asumimos un checkout por empresa para cumplir SRI de forma simple)
-        // En una version real se agruparia y generaria una factura por empresa.
         string memory companyRuc = products[cart.items[0].productId].companyRuc;
         CompanyLib.Company storage company = companies[companyRuc];
 
         _updateCompanyFeeCycle(companyRuc);
         uint8 commissionPercent = company.getApplicableFee();
-
-        uint256 subtotal0 = 0;
-        uint256 subtotal15 = 0;
-        uint256 totalIva = 0;
-        uint256 totalToPay = 0;
 
         string memory invId = company.generateInvoiceId();
         string memory fullInvKey = string(
@@ -234,63 +296,67 @@ contract Ecommerce {
         invoice.timestamp = block.timestamp;
         invoice.txHash = bytes32(
             uint256(uint160(msg.sender)) ^ block.timestamp
-        ); // Simulado, se puede mejorar
+        );
 
-        for (uint i = 0; i < cart.items.length; i++) {
-            uint256 pId = cart.items[i].productId;
-            uint256 qty = cart.items[i].quantity;
-            ProductLib.Product storage prod = products[pId];
+        uint256[3] memory totals = _processItems(cart, invoice, companyRuc);
 
-            require(
-                keccak256(bytes(prod.companyRuc)) ==
-                    keccak256(bytes(companyRuc)),
-                "Solo se procesan productos de la misma empresa por factura"
-            );
-            require(prod.stock >= qty, "Stock insuficiente durante el proceso");
-
-            uint256 unitPrice = prod.getPriceByQuantity(qty);
-            uint256 itemTotal = unitPrice * qty;
-
-            if (prod.iva == 15) {
-                subtotal15 += itemTotal;
-                totalIva += (itemTotal * 15) / 100;
-            } else {
-                subtotal0 += itemTotal;
-            }
-
-            prod.stock -= qty;
-
-            invoice.details.push(
-                InvoiceLib.InvoiceItem({
-                    productId: pId,
-                    description: prod.name,
-                    quantity: qty,
-                    unitPrice: unitPrice,
-                    ivaPercentage: prod.iva,
-                    totalItem: itemTotal
-                })
-            );
-        }
-
-        totalToPay = subtotal0 + subtotal15 + totalIva;
-        invoice.subtotal0 = subtotal0;
-        invoice.subtotal15 = subtotal15;
-        invoice.ivaAmount = totalIva;
+        uint256 totalToPay = totals[0] + totals[1] + totals[2]; // sub0 + sub15 + tIva
+        invoice.subtotal0 = totals[0];
+        invoice.subtotal15 = totals[1];
+        invoice.ivaAmount = totals[2];
         invoice.totalAmount = totalToPay;
 
-        // Ejecutar Pago y Split 90/10
         uint256 platformFee = (totalToPay * commissionPercent) / 100;
         uint256 vendorShare = totalToPay - platformFee;
 
         cbtoken.transferFrom(msg.sender, platformVault, platformFee);
         cbtoken.transferFrom(msg.sender, company.wallet, vendorShare);
 
-        // Actualizar volumen de ventas para la empresa (sin contar IVA)
-        company.currentWeekSales += (subtotal0 + subtotal15);
+        company.currentWeekSales += (totals[0] + totals[1]);
         company.nextInvoiceNumber++;
 
         cart.clear();
         emit PurchaseCompleted(msg.sender, companyRuc, invId, totalToPay);
+    }
+
+    function _processItems(
+        CartLib.Cart storage cart,
+        InvoiceLib.Invoice storage invoice,
+        string memory companyRuc
+    ) internal returns (uint256[3] memory totals) {
+        for (uint i = 0; i < cart.items.length; i++) {
+            ProductLib.Product storage prod = products[cart.items[i].productId];
+
+            require(
+                keccak256(bytes(prod.companyRuc)) ==
+                    keccak256(bytes(companyRuc)),
+                "RUC mismatch"
+            );
+            require(prod.stock >= cart.items[i].quantity, "Stock insuficiente");
+
+            uint256 unitPrice = prod.getPriceByQuantity(cart.items[i].quantity);
+            uint256 itemTotal = unitPrice * cart.items[i].quantity;
+
+            if (prod.iva == 15) {
+                totals[1] += itemTotal; // subtotal15
+                totals[2] += (itemTotal * 15) / 100; // totalIva
+            } else {
+                totals[0] += itemTotal; // subtotal0
+            }
+
+            prod.stock -= cart.items[i].quantity;
+
+            invoice.details.push(
+                InvoiceLib.InvoiceItem({
+                    productId: cart.items[i].productId,
+                    description: prod.name,
+                    quantity: cart.items[i].quantity,
+                    unitPrice: unitPrice,
+                    ivaPercentage: prod.iva,
+                    totalItem: itemTotal
+                })
+            );
+        }
     }
 
     function _updateCompanyFeeCycle(string memory ruc) internal {

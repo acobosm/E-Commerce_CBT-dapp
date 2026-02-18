@@ -105,6 +105,13 @@ Implementación de la lógica de negocio completa del marketplace descentralizad
   - `testAddProductPermissions`: Validación de roles (Admin vs Vendedor).
   - `testStockSafety`: Protección contra compras superiores al inventario disponible.
   - `testFullPurchaseAndSplit`: Venta completa con cálculo de IVA y reparto automático de fondos.
+  - `testUpdateProductPermissions`: **(Nuevo)** Validación de permisos diferenciados para edición (Admin vs Propietario).
+  - `testUpdateCompanyWallet`: **(Nuevo)** Lógica de sincronización de billetera para corregir desfasas en la red Anvil.
+- [x] **Gestión de Carrito y Errores** (`CartTest.t.sol`): **(Nuevo)**
+  - Implementación de tests específicos para `removeFromCart` y `clearCart` tras la corrección del bloqueo por "carrito mixto".
+  - Verificación de eliminación parcial y total de ítems.
+- [x] **Refactorización por Límite de Stack**: Reestructuración de la función `checkout` en sub-funciones internas para resolver el error "Stack too deep" tras la adición de nueva lógica.
+- [x] **Getter Especializado**: Implementación de `getProductPhotos` para permitir la auditoría de metadatos de imágenes desde el frontend y tests.
 
 ### Script de Despliegue
 - [x] **DeployEcommerce.s.sol**: Script parametrizado que recibe la dirección de CBToken como variable de entorno.
@@ -144,17 +151,15 @@ Desarrollo del backend administrativo con seguridad por roles (RBAC on-chain) y 
 
 ---
 
-## 🛒 Parte 6: Tienda Web para Clientes (Pendiente)
+- [x] UI consistente con el diseño premium de las apps existentes.
+- [x] **Panel Vendedor**: Gestión de productos propios y visualización de ventas.
+- [x] **Membresía VIP**: Sistema de suscripción para eliminar comisiones (10% -> 0%).
 
-**Estado:** No iniciado. Esta será la siguiente fase de desarrollo.
-
-### Funcionalidades Planificadas
-- [ ] Inicializar app Next.js en `web-customer` (Puerto 6003).
-- [ ] Catálogo público de productos con filtros y búsqueda.
-- [ ] Gestión de carrito de compras (on-chain).
-- [ ] Flujo de checkout con integración a `Ecommerce.sol`.
-- [ ] Historial de facturas del cliente.
-- [ ] UI consistente con el diseño premium de las apps existentes.
+### Fase 6.1: Refinamiento de Membresía VIP
+- [x] **Lógica de Tiempo**: Implementación de visualización explícita de expiración.
+    - **Huso Horario**: El contrato calcula el domingo a las 23:59:59 UTC.
+    - **Conversión Local**: El frontend traduce esto automáticamente a las 18:59:59 ECT (Ecuador Time), garantizando claridad absoluta para el usuario.
+- [x] **Verificación On-Chain**: Comprobación exitosa de transferencia de 500 CBT y cobro de comisión 0% en ventas reales.
 
 ---
 
@@ -165,19 +170,18 @@ Desarrollo del backend administrativo con seguridad por roles (RBAC on-chain) y 
 ### Completado ✅
 
 #### Scripts de Automatización
-- [x] **`restart-all.sh`**: Script maestro que automatiza todo el proceso de despliegue y arranque:
-  - Limpieza de procesos anteriores (Anvil, Next.js apps, tmux).
-  - Inicio de Anvil con persistencia de estado (`e-commerce_state.json`).
-  - Detección inteligente de contratos existentes (`deployed-addresses.json`).
-  - Despliegue automático de CBToken y Ecommerce si no existen.
-  - Actualización automática de `.env.local` en las 3 aplicaciones web.
-  - Inicio de servicios en sesión tmux con 4 paneles (2x2): Anvil log, Compra CBT, Pasarela, Admin.
+- [x] **`restart-all.sh`**: Script maestro de despliegue y arranque.
+  - [x] Soporte para flag `--seed` para carga automática de datos.
+- [x] **`stop-all.sh`**: Script de detención limpia.
 
-- [x] **`stop-all.sh`**: Script de detención limpia de todos los servicios con verificación de procesos.
+#### Sistema de Simulación y Contabilidad (Nuevo)
+- [x] **Motor de Seeding**: Implementación de `SeedSimulation.s.sol` para poblado dinámico de datos.
+- [x] **Configuración en JSON**: Creación de `seed-data.json` para desacoplar datos de la lógica.
+- [x] **Reporte Contable**: Implementación de `update-accounting.sh` que genera reportes CSV basados en eventos on-chain, permitiendo auditoría de comisiones del SRI.
 
 #### Prerequisitos
-- [x] **Instalación de `jq`**: Herramienta para parseo de JSON requerida por `restart-all.sh`.
-  ```bash
+- [x] **Instalación de `jq`**: Herramienta para parseo de JSON.
+```bash
   sudo apt-get update && sudo apt-get install -y jq
   ```
 
@@ -198,7 +202,6 @@ Desarrollo del backend administrativo con seguridad por roles (RBAC on-chain) y 
 
 ## 📝 Próximas Fases
 
-1. **Parte 6:** Tienda Web para Clientes (Siguiente paso inmediato).
-2. **Parte 7:** Completar funciones opcionales (Bonus).
-3. **Parte 8:** Revisión final y documentación completa.
-4. **Parte 9:** Preparación de video demostrativo.
+1. **Parte 7 (Bonus):** Implementación de funciones opcionales (Reseñas, Multi-moneda o Loyalty).
+2. **Parte 8:** Revisión final E2E y documentación de entrega.
+3. **Parte 9:** Preparación y grabación del video demostrativo.

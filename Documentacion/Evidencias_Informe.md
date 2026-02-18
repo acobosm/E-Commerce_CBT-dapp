@@ -200,7 +200,7 @@ Para tu informe técnico, estos son los archivos principales que componen esta f
     - `sc-ecommerce/test/Ecommerce.t.sol`: Suite de pruebas que garantiza que no haya errores de dinero o stock.
 4.  **Infraestructura de Despliegue:**
     - `sc-ecommerce/script/DeployEcommerce.s.sol`: Script para instalar todo en la blockchain.
-    - `sc-ecommerce/foundry.toml`: Configuración técnica para optimizar el contrato.
+    - `sc-ecommerce/foundry.toml`: Orquestador de configuración de Foundry. Define niveles de optimización del compilador (`optimizer`), versiones de `solc` y permisos de acceso al sistema de archivos para los scripts de automatización.
 
 ### Cómo ejecutar los Tests manualmente (Para tu Informe)
 Para capturar las evidencias de funcionamiento de los Smart Contracts, sigue estos pasos:
@@ -213,13 +213,18 @@ Para capturar las evidencias de funcionamiento de los Smart Contracts, sigue est
     ```bash
     forge test -vv
     ```
-3.  **Captura de Pantalla Sugerida:** Captura la salida de la terminal donde se vean todos los tests marcados como `[PASS]`. Esto demuestra que el contrato es seguro y funcional.
+3.  **Confirmación de Seguridad (New)**: Captura la salida de los tests de permisos de edición. Esto demuestra que el sistema protege las fotos del vendedor frente a cambios administrativos no autorizados.
 
 #### Tests Verificados:
 - `testRegisterCompany`: Registro exitoso de RUC y datos de empresa.
 - `testAddProductPermissions`: Validación de roles (Admin vs Vendedor).
 - `testStockSafety`: Protección contra compras superiores al inventario disponible.
 - `testFullPurchaseAndSplit`: Venta completa con cálculo de IVA y reparto automático de fondos (90% al vendedor, 10% a plataforma).
+- `testUpdateProductPermissions`: **(Éxito)** Verificación de que el Admin no pueda modificar fotos ajenas y que el vendedor tenga control total sobre sus productos.
+- `testUpdateCompanyWallet`: **(Nuevo)** Validación de cambio de billetera corporativa y actualización de mapeo RUC.
+- `testUpdateCompanyWalletPermissions`: **(Nuevo)** Garantía de que solo el Admin puede reasignar billeteras a empresas.
+
+**Resultado Global:** `7 passed; 0 failed; 0 skipped`.
 
 ### Cómo Desplegar el Contrato en Anvil (Local)
 
@@ -289,16 +294,30 @@ Estos son los archivos que definen la lógica de esta fase:
 ### Resumen de Implementación
 Se han creado scripts de automatización para facilitar el despliegue y gestión de toda la plataforma E-Commerce. Estos scripts adelantan parcialmente la Fase 7 del proyecto.
 
-### Componentes Desarrollados
+### 3.4 Gestión de Carrito y Recuperación de Errores (Nuevo)
+Se detectó un caso de borde donde un usuario podía quedar bloqueado si el valor de su carrito superaba su saldo ("carrito mixto"). Para solucionar esto, se implementaron funciones de limpieza:
 
-1.  **Script de Reinicio Completo (`scripts/restart-all.sh`):**
+-   `removeFromCart(productId, quantity)`: Permite eliminar items específicos o reducir cantidades.
+-   `clearCart()`: Vacía completamente el carrito en caso de error crítico.
+-   `test/CartTest.t.sol`: Suite de pruebas dedicada para validar la lógica de eliminación.
+
+### 3.6 Mejoras de UX en Auditoría (Web Admin)
+Se optimizó la página `/invoices` para facilitar la gestión masiva de facturas:
+-   **Listado Automático:** Visualización inmediata de todas las facturas emitidas (lectura de eventos `PurchaseCompleted`).
+-   **Filtros Inteligentes:** Selector de empresa (Dropdown) y filtro opcional por ID de factura.
+-   **Detalle On-Demand:** Carga diferida de los detalles de factura (`getInvoice`) solo al solicitarlo, optimizando llamadas RPC.
+
+### 3.5 Despliegue en Anvil
+El despliegue local es esencial para el desarrollo rápido.
+**Comando:** `./scripts/restart-all.sh`):**
     - Detiene procesos anteriores (Anvil, Next.js apps)
     - Inicia Anvil con persistencia de estado (`e-commerce_state.json`)
     - Detecta si los contratos ya están desplegados (usando `deployed-addresses.json`)
     - Si NO existen: Despliega CBToken y Ecommerce automáticamente
     - Si existen: Reutiliza las direcciones guardadas
-    - Actualiza automáticamente los `.env.local` de las 3 aplicaciones web
-    - Levanta las aplicaciones en una sesión `tmux` con 4 paneles (2x2)
+    - Actualiza automáticamente los `.env.local` de las 4 aplicaciones web
+    - **Sincroniza automáticamente los ABIs** (`Ecommerce.json` y `CBToken.json`) desde los contratos hacia el frontend
+    - Levanta las aplicaciones en una sesión `tmux` con 4 paneles (2x2) en dos pestañas (Blockchain y Web Apps)
 
 2.  **Script de Detención (`scripts/stop-all.sh`):**
     - Detiene Anvil, aplicaciones Next.js y sesiones tmux
@@ -352,6 +371,11 @@ Setting up jq (1.7.1-3ubuntu0.24.04.1) ...
   - Compra Stablecoin: http://localhost:6001
   - Pasarela de Pago:  http://localhost:6002
   - Panel Admin:       http://localhost:3000
+  - Tienda Cliente:    http://localhost:6003
+
+🔄 Sincronizando ABIs para el frontend...
+  ✅ Ecommerce.json sincronizado
+  ✅ CBToken.json sincronizado
 
 📊 Blockchain:
   - Anvil RPC: http://localhost:8545
@@ -395,10 +419,163 @@ tmux attach -t ecommerce
 
 ### Notas Importantes
 
-- ⚠️  **Fase 6 pendiente:** Cuando se implemente `web-customer`, se añadirá una segunda pestaña en tmux para su monitoreo.
+- ⚠️  **Fase 6:** La aplicación `web-customer` ya está integrada en el flujo de reinicio y sincronización de ABIs.
 - 💾 **Persistencia:** Mientras exista `e-commerce_state.json`, las direcciones de contratos no cambiarán entre reinicios.
 - 🔄 **Fresh Start:** Para redesplegar desde cero, eliminar `e-commerce_state.json` y `deployed-addresses.json`.
 
 ### Diagrama de Flujo del Script de Automatización
 ![Flujo de restart-all.sh](imagenes/Restart_Script_Flowchart.png)
+
+
+---
+
+## 8. Parte 6: Web Customer (Tienda Final)
+
+### Resumen de Implementación
+La aplicación `web-customer` (Puerto 6003) es la interfaz final para el usuario, integrando todo el ecosistema: navegación de productos, carrito de compras inteligente, cálculo de impuestos (IVA) y pago con CBTokens.
+
+### Build Exitoso
+**Comando:** `cd web-customer && npm run build`
+**Resultado:**
+```text
+✓ Finalizing page optimization
+Route (app)
+┌ ○ /
+├ ○ /cart
+├ ○ /orders
+└ ○ /products/[id]
+```
+
+### Características Clave Implementadas
+
+1.  **Cálculo de IVA en Frontend (SRI Compliant):**
+    - El carrito detecta productos con IVA (15%) y calcula el desglose exacto.
+    - **Visualización:** Subtotal, IVA y Total se muestran claramente antes del pago.
+    - **Sincronización:** El total aprobado en MetaMask coincide exactamente con el contrato (`Subtotal + Tax`), evitando errores de `InsufficientAllowance`.
+
+2.  **Smart Cart Sync (Sincronización Inteligente):**
+    - **Problema:** Enviar todo el carrito local al contrato gastaba mucho gas y duplicaba ítems si la transacción fallaba.
+    - **Solución:** El frontend lee el estado del contrato (`getCartItems`) y solo envía la **diferencia** (delta) de cantidad.
+    - **Beneficio:** Menor costo de gas y cero duplicados.
+
+3.  **UX Reactiva:**
+    - **Auto-Refresh de Balance:** Al volver a la pestaña tras recargar saldo, el balance de CBTokens se actualiza automáticamente (`window.onfocus`).
+    - **Validación de Registro:** El botón de pago se bloquea si el usuario no tiene un perfil registrado on-chain (`checkClient`).
+
+4.  **Historial de Pedidos:**
+    - Visualización de compras pasadas con hashes de transacción reales y enlaces al explorador de bloques.
+
+### Archivos Relevantes de la Fase 6
+
+1.  **Lógica de Negocio (Contexto):**
+    - `web-customer/src/context/CartContext.tsx`: Gestión global del estado del carrito, cálculos de impuestos y persistencia local.
+2.  **Interfaz de Usuario:**
+    - `web-customer/src/app/page.tsx`: Catálogo principal con filtrado y búsqueda.
+    - `web-customer/src/app/cart/page.tsx`: Lógica de sincronización, validación de allowance y UX de compra.
+    - `web-customer/src/app/orders/page.tsx`: Decodificación de eventos `PurchaseCompleted` para mostrar el historial.
+    - `web-customer/src/components/Navbar.tsx`: Navegación persistente con indicador de carrito y balance.
+    - `web-customer/src/components/ProductCard.tsx`: Componente de presentación de producto con lógica de stock.
+3.  **Integración Web3:**
+    - `web-customer/src/hooks/useWeb3.ts`: Conexión robusta con detección de cuentas y contratos.
+
+### Capturas Sugeridas
+1.  **Carrito con Impuestos:** Muestra un producto con IVA y el desglose de precios.
+2.  **Compra Exitosa:** Modal de confirmación tras una transacción exitosa.
+3.  **Historial de Pedidos:** Lista de compras con hashes visibles.
+
+### Diagrama de Secuencia: Smart Cart Sync
+![Smart Cart Sync](./imagenes/Smart_Cart_Sync_Sequence.png)
+
+### Flujo de Transacción de Compra (3 Pasos)
+Es importante documentar por qué el usuario debe firmar 3 transacciones en MetaMask para completar una compra, ya que esto responde a la seguridad y arquitectura de la Blockchain:
+
+1.  **Aprobación (Approve - ERC20):**
+    - **Razón:** El contrato `CBToken` (Stablecoin) es independiente del contrato de `Ecommerce`. Por seguridad, el usuario debe autorizar explícitamente al contrato E-Commerce a "gastar" sus tokens.
+    - **Acción:** `token.approve(ecommerce_address, total_amount)`
+
+2.  **Sincronización (Add To Cart):**
+    - **Razón:** La EVM (Ethereum Virtual Machine) no permite pasar arrays complejos de objetos en una sola función de manera eficiente y segura para validación profunda. Por ello, los productos se agregan al almacenamiento del contrato (`storage`) para que este pueda validar stock, precios y vendedor on-chain antes de cobrar.
+    - **Acción:** `ecommerce.addToCart(productId, quantity)`
+
+3.  **Confirmación Final (Checkout):**
+    - **Razón:** Una vez que el contrato tiene la lista de productos y la autorización de fondos, se ejecuta la lógica final: cálculo de impuestos, transferencia de tokens, generación de factura SRI y limpieza del carrito.
+    - **Acción:** `ecommerce.checkout()`
+
+---
+
+## 9. Parte 7 (Extensión): Sistema de Simulación y Contabilidad
+
+### Resumen de Funcionalidad
+Se ha desarrollado un sistema de "Seeding" inteligente y un rastreador contable para validar el reparto de comisiones y facilitar demostraciones rápidas.
+
+### 1. Script de Seeding (Foundry)
+- **Archivo:** `sc-ecommerce/script/SeedSimulation.s.sol`
+- **Capacidades:**
+    - Lectura de configuración desde `seed-data.json`.
+    - Registro automático de 4 empresas y 5 clientes.
+    - Fondeo automático de CBT (Stablecoins) a clientes.
+    - Ejecución de ciclo de venta: `Add to Cart` -> `Approve` -> `Checkout`.
+    - **Protección contra duplicados:** Verifica si el RUC ya existe antes de registrar para permitir el uso mixto (manual/automático).
+
+### 2. Rastreador Contable (Accounting)
+- **Archivo:** `scripts/update-accounting.sh`
+- **Mecanismo:** Escanea los eventos `PurchaseCompleted` directamente de la blockchain.
+- **Reporte Generado:** `logs/accounting.csv`
+- **Datos Capturados:** Bloque, Fecha, TxHash, RUC Empresa, Wallet Cliente, Total Venta, Comisión Plataforma (10%/7%/0%), Neto Vendedor.
+
+### Cómo verificar (Para el Informe)
+1. Ejecuta la simulación: `./scripts/run-sim.sh`
+2. Muestra el contenido del CSV: `column -t -s, logs/accounting.csv`
+3. Captura la salida que demuestra cómo la **Cuenta 1 (Vault)** recibe el 10% de cada transacción y el vendedor el 90%.
+
+### Archivos Relevantes
+- `sc-ecommerce/script/seed-data.json`: Plantilla de datos.
+- `scripts/run-sim.sh`: Ejecutor maestro.
+- `logs/accounting.csv`: Resultado contable.
+
+---
+
+### 3. Nota Técnica: Configuración de Permisos (`foundry.toml`)
+
+Para que el script de simulación pueda leer el archivo `deployed-addresses.json` (que se encuentra fuera de la carpeta `sc-ecommerce`), se ha configurado una regla de permisos específica.
+
+**¿Qué hace `foundry.toml`?**
+Es el archivo de configuración central de Foundry. Controla cómo se compilan los contratos, cuántas pasadas hace el optimizador para ahorrar gas y, lo más importante, qué carpetas del sistema puede "ver" el entorno de ejecución de Solidity.
+
+**¿Por qué se añadió `fs_permissions`?**
+Por defecto, Foundry aplica una política de **"Sandbox"** (caja de arena) por seguridad: los scripts solo pueden leer archivos dentro de su propia carpeta. Al añadir la siguiente línea:
+`fs_permissions = [{ access = "read", path = ".." }]`
+
+Se le indica a Foundry que permita al script `SeedSimulation.s.sol` "subir un nivel" en las carpetas para encontrar las direcciones de los contratos, logrando así una integración perfecta entre los procesos de despliegue de Bash y la lógica de Smart Contracts.
+
+---
+
+## 10. Parte 6 (Extensión): Membresía VIP y Comisiones 0%
+
+### Resumen Técnico del Beneficio
+Se ha implementado un sistema de lealtad donde los vendedores pueden pagar **500 CBT** para obtener el estatus VIP, eliminando todas las comisiones de plataforma hasta el siguiente domingo.
+
+### Verificación On-Chain (Blockchain Evidence)
+Para garantizar la validez del sistema, se realizaron las siguientes comprobaciones mediante comandos `cast`:
+
+1. **Pago de Membresía:**
+   - **Transacción:** `0x2efc...`
+   - **Resultado:** Samantha (`...a0ee`) transfirió **500.00 CBT** a la Plataforma (Alice: `0x7099...`).
+   - **Timestamp de Expiración:** `1771119999` (Domingo 23:59:59 UTC).
+
+2. **Ventas con Comisión 0%:**
+   - **Venta 1 (Bob Dylan):** Transacción `0x42d2...`. Alice recibió **0 CBT** de comisión.
+   - **Venta 2 (Carol Danvers):** Transacción `0x83ca...`. Alice recibió **0 CBT** de comisión.
+   - **Conclusión:** El contrato identificó correctamente el estatus VIP y aplicó el 0% en lugar del 10% estándar.
+
+### Lógica de Huso Horario y UX
+- **Huso Horario Base:** El contrato inteligente opera en **UTC**. La expiración se fija en el último segundo del domingo UTC (23:59:59).
+- **Traducción Local (Ecuador):** El frontend detecta automáticamente la zona horaria del usuario (ECT: UTC-5) y muestra la expiración correcta: **18:59:59**.
+- **Etiqueta Explícita:** Se ha añadido el sufijo " (Ecuador Time)" a la fecha de expiración en la interfaz para evitar cualquier confusión con el tiempo UTC de la blockchain.
+- **Evidencia Visual:** El panel de vendedor muestra dinámicamente el distintivo "Socio VIP Activo" con la fecha y hora explícita, brindando total transparencia al comerciante.
+
+### Mejoras de UX y Control de Acceso
+1. **Redirección de No-Vendedores**: Se implementó una lógica en `/seller` que detecta si el usuario no tiene permisos de empresa y lo redirige automáticamente a `/products`.
+2. **Facturas Admin Inline**: Se refactorizó la página de Auditoría de Facturas para que el detalle se despliegue directamente debajo de la fila seleccionada, eliminando la necesidad de scroll excesivo.
+
 

@@ -7,6 +7,7 @@ En Blockchain, el "ERD" representa cómo se estructuran los `structs` y `mapping
 
 ### Código para Eraser (ERD as Code)
 ```eraser
+title ERD
 // Tablas de la Blockchain
 Company [icon: building] {
   ruc string [pk]
@@ -22,6 +23,14 @@ Product [icon: package] {
   price_1 uint256
   stock uint256
   companyRuc string [fk]
+  active bool
+  iva uint8
+}
+
+// Nueva Estructura: CartLib (On-Chain)
+Cart [icon: shopping-cart] {
+  owner address [pk]
+  items CartItem[]
 }
 
 Invoice [icon: file-text] {
@@ -34,6 +43,7 @@ Invoice [icon: file-text] {
 // Relaciones
 Company.ruc 1 <> * Product.companyRuc
 Company.ruc 1 <> * Invoice.companyRuc
+Cart.owner 1 - 1 User
 ```
 
 ---
@@ -95,41 +105,47 @@ Este diagrama muestra la lógica de decisión del script maestro de despliegue y
 ### Código para Eraser (Flowchart Coloreado)
 ```eraser
 // Flowchart: restart-all.sh Automation Script
-
+title Automation Flow
 Start [shape: oval, icon: play, color: green]
 Stop_Processes [icon: x-circle, label: "Detener Procesos\n(Anvil, Next.js, tmux)", color: red]
 Start_Anvil [icon: database, label: "Iniciar Anvil\n(con persistencia)", color: blue]
-Wait_Anvil [icon: clock, label: "Esperar\n'Listening on 0.0.0.0:8545'", color: yellow]
+Wait_Anvil [icon: clock, label: "Esperar\n'Anvil Listening'", color: yellow]
 Check_Deployed [shape: diamond, label: "¿Existe\ndeployed-addresses.json?", color: purple]
-Read_Addresses [icon: file-text, label: "Leer Direcciones\ndel JSON", color: cyan]
-Deploy_CBToken [icon: cpu, label: "Desplegar CBToken\n(forge script)", color: orange]
-Deploy_Ecommerce [icon: cpu, label: "Desplegar Ecommerce\n(forge script)", color: orange]
+
+// Casilleros de Decisión Estilo Clásico
+SI [label: "SI (Existe)", color: white]
+NO [label: "NO (Nuevo)", color: white]
+
+Read_Addresses [icon: file-text, label: "Cargar Direcciones\nExistentes", color: cyan]
+Deploy_Full [icon: cpu, label: "Desplegar Contratos\n(Forge Script)", color: orange]
 Save_Addresses [icon: save, label: "Guardar Direcciones\nen JSON", color: cyan]
-Update_Env [icon: settings, label: "Actualizar .env.local\n(3 archivos)", color: blue]
+
+Update_Env [icon: settings, label: "Actualizar .env.local\ny Sincronizar ABIs", color: blue]
+Check_Seed [shape: diamond, label: "¿Flag --seed\ndetectado?", color: purple]
+
+// Referencia al sub-proceso [1]
+Run_Simulation [icon: play-circle, label: "Ejecutar Simulación\n(run-sim.sh) ❶", color: orange]
+
 Start_Tmux [icon: terminal, label: "Iniciar tmux\n(4 paneles 2x2)", color: blue]
 Show_Summary [icon: check-circle, label: "Mostrar Resumen\n(Direcciones + URLs)", color: green]
 End [shape: oval, icon: check, color: green]
 
-// Flujo principal
-Start > Stop_Processes
-Stop_Processes > Start_Anvil
-Start_Anvil > Wait_Anvil
-Wait_Anvil > Check_Deployed
+// Flujo de Control
+Start > Stop_Processes > Start_Anvil > Wait_Anvil > Check_Deployed
 
-// Rama: Contratos existentes
-Check_Deployed -- "SÍ" --> Read_Addresses
-Read_Addresses > Update_Env
+Check_Deployed > SI
+Check_Deployed > NO
 
-// Rama: Despliegue desde cero
-Check_Deployed -- "NO" --> Deploy_CBToken
-Deploy_CBToken > Deploy_Ecommerce
-Deploy_Ecommerce > Save_Addresses
-Save_Addresses > Update_Env
+SI > Read_Addresses > Update_Env
+NO > Deploy_Full > Save_Addresses > Update_Env
 
-// Continuación común
-Update_Env > Start_Tmux
-Start_Tmux > Show_Summary
-Show_Summary > End
+// Nueva Lógica de Simulación
+Update_Env > Check_Seed
+Check_Seed > Run_Simulation: Sí
+Check_Seed > Start_Tmux: No
+Run_Simulation > Start_Tmux
+
+Start_Tmux > Show_Summary > End
 ```
 
 > [!TIP]
@@ -170,3 +186,82 @@ GitHub no puede "dibujar" el código de Eraser directamente (aunque sí puede di
 
 > [!TIP]
 > **El Secreto del Senior:** Un buen repositorio de GitHub tiene una carpeta `/docs` con archivos de texto que generan los diagramas. Esto se llama **"Living Documentation"** (Documentación Viva).
+
+## 7. Diagrama de Secuencia: Smart Cart Sync (Optimización de Gas)
+
+Este diagrama explica la lógica inteligente implementada en el Frontend para evitar duplicar ítems y ahorrar gas, sincronizando solo la diferencia (delta) entre el carrito local y el de la blockchain.
+
+### Código para Eraser (Sequence as Code)
+```eraser
+title Smart Cart Sync Full Checkout Flow
+// Sequence: Full Checkout Flow (3 Transactions)
+User [shape: person]
+Frontend [icon: monitor]
+CBToken_SC [icon: dollar]
+Ecommerce_SC [icon: cpu]
+
+// 1. APPROVE (ERC20 Safety)
+User > Frontend: 1. Click "Pagar Ahora"
+Frontend > CBToken_SC: 2. approve(Ecommerce, TotalAmount)
+CBToken_SC > Frontend: 3. Transaction Confirmed (Tx 1/3)
+
+// 2. SMART SYNC (Cart Logic)
+Frontend > Ecommerce_SC: 4. getCartItems() [Read-Only]
+Ecommerce_SC > Frontend: 5. Return Current On-Chain Cart
+Frontend > Frontend: 6. Calculate Delta (Local - OnChain)
+Frontend > Ecommerce_SC: 7. addToCart(ItemID, Delta)
+Ecommerce_SC > Frontend: 8. Transaction Confirmed (Tx 2/3)
+
+// 3. CHECKOUT (Finalization)
+Frontend > Ecommerce_SC: 9. checkout()
+Ecommerce_SC > CBToken_SC: 10. transferFrom(User, Seller)
+Ecommerce_SC > Frontend: 11. Purchase Completed (Tx 3/3)
+Frontend > User: 12. Show Success Modal
+``` 
+
+---
+
+## 8. Diagrama de Flujo: ❶ Simulación y Contabilidad (Arquitectura Final)
+
+Este diagrama detalla la lógica interna del proceso de carga de datos y el reporte contable automático.
+
+### Código para Eraser (Flowchart Pro)
+```eraser
+// Flowchart: Simulation and Accounting System
+title ❶ Simulation & Accounting Flow
+Seed_JSON [icon: file-json, label: "❶ seed-data.json\n(Plantilla)", color: cyan]
+Foundry_Script [icon: cpu, label: "SeedSimulation.s.sol\n(Logic)", color: orange]
+Check_Company [shape: diamond, label: "¿RUC ya\nexiste?", color: purple]
+Register_Comp [icon: building, label: "Reg. Empresa\n(Admin Role)", color: blue]
+Skip_Reg [icon: skip-forward, label: "Saltar Registro", color: yellow]
+Add_Products [icon: package, label: "Añadir Catalogo", color: blue]
+Fund_Clients [icon: dollar-sign, label: "Fondear Clientes\n(Mint CBT)", color: blue]
+Execute_Sales [icon: shopping-cart, label: "Ciclo de Venta\n(Auto-Checkout)", color: green]
+Blockchain_Events [icon: database, label: "Blockchain Logs\n(Events)", color: gray]
+Bash_Updater [icon: terminal, label: "update-accounting.sh", color: cyan]
+Accounting_CSV [icon: file-spreadsheet, label: "accounting.csv\n(Logs Folder)", color: green]
+
+// Flujo de Datos
+Seed_JSON > Foundry_Script
+Foundry_Script > Check_Company
+
+// Lógica de protección
+Check_Company > Register_Comp: No
+Check_Company > Skip_Reg: Sí
+
+Register_Comp > Add_Products
+Skip_Reg > Add_Products
+
+Add_Products > Fund_Clients
+Fund_Clients > Execute_Sales
+Execute_Sales > Blockchain_Events
+
+// Proceso de Reporte
+Blockchain_Events > Bash_Updater
+Bash_Updater > Accounting_CSV
+```
+
+### Componentes de la Documentación Viva:
+1.  **JSON de Semilla:** Estructura desacoplada de la lógica del contrato.
+2.  **Solidity Seeding:** Automatización de orquestación (Approve + Cart + Checkout).
+3.  **Bash Accounting:** Extracción de datos "Off-chain" para reportes administrativos.

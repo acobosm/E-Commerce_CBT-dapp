@@ -1,0 +1,935 @@
+No files changed, compilation skipped
+Traces:
+  [3649275] → new SeedSimulation@0x9f7cF1d1F558E57ef88a59ac3D47214eF25B6A06
+    └─ ← [Return] 16896 bytes of code
+
+  [22930567] SeedSimulation::run()
+    ├─ [0] VM::projectRoot() [staticcall]
+    │   └─ ← [Return] "/home/ebit/projects/0 CodeCrypto Academy/03 Ethereum Practice/Intro a Proyectos de Entrenamiento/Proyectos obligatorios/03 E-Commerce/sc-ecommerce"
+    ├─ [0] VM::readFile("/home/ebit/projects/0 CodeCrypto Academy/03 Ethereum Practice/Intro a Proyectos de Entrenamiento/Proyectos obligatorios/03 E-Commerce/sc-ecommerce/../deployed-addresses.json") [staticcall]
+    │   └─ ← [Return] <file>
+    ├─ [0] VM::parseJsonAddress("<stringified JSON>", ".cbtoken") [staticcall]
+    │   └─ ← [Return] 0x5FbDB2315678afecb367f032d93F642f64180aa3
+    ├─ [0] VM::parseJsonAddress("<stringified JSON>", ".ecommerce") [staticcall]
+    │   └─ ← [Return] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0
+    ├─ [0] VM::readFile("/home/ebit/projects/0 CodeCrypto Academy/03 Ethereum Practice/Intro a Proyectos de Entrenamiento/Proyectos obligatorios/03 E-Commerce/sc-ecommerce/script/seed-data.json") [staticcall]
+    │   └─ ← [Return] <file>
+    ├─ [0] VM::parseJson("<JSON file>", ".clients") [staticcall]
+    │   └─ ← [Return] <encoded JSON value>
+    ├─ [0] VM::parseJson("<JSON file>", ".companies") [staticcall]
+    │   └─ ← [Return] <encoded JSON value>
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC
+    ├─ [0] VM::deal(0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC, 10000000000000000000 [1e19])
+    │   └─ ← [Return]
+    ├─ [15894] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::clients(0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC) [staticcall]
+    │   └─ ← [Return] "Bob Dylan", "1720000002", 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC, "bob.dylan@test.com", "0991112222", "Av. Amazonas y Orellana"
+    ├─ [2851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC) [staticcall]
+    │   └─ ← [Return] 799901500 [7.999e8]
+    ├─ [0] VM::startBroadcast(<pk>)
+    │   └─ ← [Return]
+    ├─ [15029] 0x5FbDB2315678afecb367f032d93F642f64180aa3::mint(0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC, 98500 [9.85e4])
+    │   ├─ emit Transfer(from: 0x0000000000000000000000000000000000000000, to: 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC, value: 98500 [9.85e4])
+    │   ├─ emit TokensMinted(to: 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC, amount: 98500 [9.85e4])
+    │   └─ ← [Stop]
+    ├─ [0] VM::stopBroadcast()
+    │   └─ ← [Return]
+    ├─ [0] console::log("Fondos completados (top-up) para:", "Bob Dylan") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] 0x90F79bf6EB2c4f870365E785982E1f101E93b906
+    ├─ [0] VM::deal(0x90F79bf6EB2c4f870365E785982E1f101E93b906, 10000000000000000000 [1e19])
+    │   └─ ← [Return]
+    ├─ [15894] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::clients(0x90F79bf6EB2c4f870365E785982E1f101E93b906) [staticcall]
+    │   └─ ← [Return] "Carol Danvers", "1720000003", 0x90F79bf6EB2c4f870365E785982E1f101E93b906, "carol.danvers@test.com", "0993334444", "Via a la Costa Km 10"
+    ├─ [2851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x90F79bf6EB2c4f870365E785982E1f101E93b906) [staticcall]
+    │   └─ ← [Return] 571390000 [5.713e8]
+    ├─ [0] VM::startBroadcast(<pk>)
+    │   └─ ← [Return]
+    ├─ [8229] 0x5FbDB2315678afecb367f032d93F642f64180aa3::mint(0x90F79bf6EB2c4f870365E785982E1f101E93b906, 128610000 [1.286e8])
+    │   ├─ emit Transfer(from: 0x0000000000000000000000000000000000000000, to: 0x90F79bf6EB2c4f870365E785982E1f101E93b906, value: 128610000 [1.286e8])
+    │   ├─ emit TokensMinted(to: 0x90F79bf6EB2c4f870365E785982E1f101E93b906, amount: 128610000 [1.286e8])
+    │   └─ ← [Stop]
+    ├─ [0] VM::stopBroadcast()
+    │   └─ ← [Return]
+    ├─ [0] console::log("Fondos completados (top-up) para:", "Carol Danvers") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65
+    ├─ [0] VM::deal(0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, 10000000000000000000 [1e19])
+    │   └─ ← [Return]
+    ├─ [15894] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::clients(0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65) [staticcall]
+    │   └─ ← [Return] "Aura Fraser", "1720000004", 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, "aura.fraser@test.com", "0995556666", "La Floresta, Sevilla N24"
+    ├─ [2851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65) [staticcall]
+    │   └─ ← [Return] 241336500 [2.413e8]
+    ├─ [0] VM::startBroadcast(<pk>)
+    │   └─ ← [Return]
+    ├─ [8229] 0x5FbDB2315678afecb367f032d93F642f64180aa3::mint(0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, 758663500 [7.586e8])
+    │   ├─ emit Transfer(from: 0x0000000000000000000000000000000000000000, to: 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, value: 758663500 [7.586e8])
+    │   ├─ emit TokensMinted(to: 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, amount: 758663500 [7.586e8])
+    │   └─ ← [Stop]
+    ├─ [0] VM::stopBroadcast()
+    │   └─ ← [Return]
+    ├─ [0] console::log("Fondos completados (top-up) para:", "Aura Fraser") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc
+    ├─ [0] VM::deal(0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, 10000000000000000000 [1e19])
+    │   └─ ← [Return]
+    ├─ [15894] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::clients(0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc) [staticcall]
+    │   └─ ← [Return] "Leslie Campcastlle", "1720000005", 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, "leslie.campcastlle@test.com", "0997778888", "Cumbaya, San Francisco"
+    ├─ [2851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc) [staticcall]
+    │   └─ ← [Return] 1630723000 [1.63e9]
+    ├─ [0] VM::startBroadcast(<pk>)
+    │   └─ ← [Return]
+    ├─ [8229] 0x5FbDB2315678afecb367f032d93F642f64180aa3::mint(0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, 169277000 [1.692e8])
+    │   ├─ emit Transfer(from: 0x0000000000000000000000000000000000000000, to: 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, value: 169277000 [1.692e8])
+    │   ├─ emit TokensMinted(to: 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, amount: 169277000 [1.692e8])
+    │   └─ ← [Stop]
+    ├─ [0] VM::stopBroadcast()
+    │   └─ ← [Return]
+    ├─ [0] console::log("Fondos completados (top-up) para:", "Leslie Campcastlle") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] 0x976EA74026E726554dB657fA54763abd0C3a0aa9
+    ├─ [0] VM::deal(0x976EA74026E726554dB657fA54763abd0C3a0aa9, 10000000000000000000 [1e19])
+    │   └─ ← [Return]
+    ├─ [15894] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::clients(0x976EA74026E726554dB657fA54763abd0C3a0aa9) [staticcall]
+    │   └─ ← [Return] "Tony Corlleone", "1720000006", 0x976EA74026E726554dB657fA54763abd0C3a0aa9, "tony.corlleone@test.com", "0999990000", "Cdla. Kennedy, Calle 5ta"
+    ├─ [2851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x976EA74026E726554dB657fA54763abd0C3a0aa9) [staticcall]
+    │   └─ ← [Return] 82895000 [8.289e7]
+    ├─ [0] VM::startBroadcast(<pk>)
+    │   └─ ← [Return]
+    ├─ [8229] 0x5FbDB2315678afecb367f032d93F642f64180aa3::mint(0x976EA74026E726554dB657fA54763abd0C3a0aa9, 2417105000 [2.417e9])
+    │   ├─ emit Transfer(from: 0x0000000000000000000000000000000000000000, to: 0x976EA74026E726554dB657fA54763abd0C3a0aa9, value: 2417105000 [2.417e9])
+    │   ├─ emit TokensMinted(to: 0x976EA74026E726554dB657fA54763abd0C3a0aa9, amount: 2417105000 [2.417e9])
+    │   └─ ← [Stop]
+    ├─ [0] VM::stopBroadcast()
+    │   └─ ← [Return]
+    ├─ [0] console::log("Fondos completados (top-up) para:", "Tony Corlleone") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] 0x14dC79964da2C08b23698B3D3cc7Ca32193d9955
+    ├─ [0] VM::deal(0x14dC79964da2C08b23698B3D3cc7Ca32193d9955, 10000000000000000000 [1e19])
+    │   └─ ← [Return]
+    ├─ [39855] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::companies("1792101601001") [staticcall]
+    │   └─ ← [Return] "Alpha Corp", "1792101601001", 0x28c7964Cde252957ea267018C7EF5D3750422da8, true, "Av. Amazonas y Av. Japon", "0999888777", "Lideres en tecnologia y gadgets.", "info@alphacorp.com", "https://logo.url/test.png", "001", "001", 9, 995610000 [9.956e8], 1771008555 [1.771e9], 0, 0
+    ├─ [0] console::log("Compañía ya existe, saltando registro y productos:", "Alpha Corp") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] 0x23618e81E3f5cdF7f54C3d65f7FBc0aBf5B21E8f
+    ├─ [0] VM::deal(0x23618e81E3f5cdF7f54C3d65f7FBc0aBf5B21E8f, 10000000000000000000 [1e19])
+    │   └─ ← [Return]
+    ├─ [42053] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::companies("1792101602001") [staticcall]
+    │   └─ ← [Return] "Muse Box", "1792101602001", 0x23618e81E3f5cdF7f54C3d65f7FBc0aBf5B21E8f, true, "Calle de la Moda 55", "0999555444", "Instrumentos musicales de calidad.", "ventas@musebox.com", "https://logo.url/test.png", "001", "001", 5, 2202520000 [2.202e9], 1771010953 [1.771e9], 0, 0
+    ├─ [0] console::log("Compañía ya existe, saltando registro y productos:", "Muse Box") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720
+    ├─ [0] VM::deal(0xa0Ee7A142d267C1f36714E4a8F75612F20a79720, 10000000000000000000 [1e19])
+    │   └─ ← [Return]
+    ├─ [37629] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::companies("1792101603001") [staticcall]
+    │   └─ ← [Return] "STFitness", "1792101603001", 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720, true, "Parque Chino", "0999333222", "Productos para vida Fitness.", "contacto@stfitness.com", "https://logo.url/test.png", "001", "001", 7, 395370000 [3.953e8], 1771011896 [1.771e9], 0, 0
+    ├─ [0] console::log("Compañía ya existe, saltando registro y productos:", "STFitness") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] 0x70997970C51812dc3A010C7d01b50e0d17dc79C8
+    ├─ [0] VM::deal(0x70997970C51812dc3A010C7d01b50e0d17dc79C8, 10000000000000000000 [1e19])
+    │   └─ ← [Return]
+    ├─ [46478] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::companies("1792101604001") [staticcall]
+    │   └─ ← [Return] "CBT Marketplace", "1792101604001", 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, true, "Av. Emilio Romero Menendez y Av. Pedro Valverde Alvarez", "0999111000", "Plataforma de comercio electronico.", "pedidos@cbtmarketplace.com", "https://logo.url/test.png", "001", "001", 6, 440910000 [4.409e8], 1771011896 [1.771e9], 0, 0
+    ├─ [0] console::log("Compañía ya existe, saltando registro y productos:", "CBT Marketplace") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [2361] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::nextProductId() [staticcall]
+    │   └─ ← [Return] 13
+    ├─ [16419] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::products(1) [staticcall]
+    │   └─ ← [Return] "Bajo 5 cuerdas Ibanez", 299990000 [2.999e8], 284990500 [2.849e8], 254991500 [2.549e8], 99, "1792101602001", true, 15
+    ├─ [20844] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::products(2) [staticcall]
+    │   └─ ← [Return] "Bateria Electronica ALESIS Nitro Pro", 701270000 [7.012e8], 666206500 [6.662e8], 596079500 [5.96e8], 4, "1792101602001", true, 15
+    ├─ [16419] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::products(3) [staticcall]
+    │   └─ ← [Return] "Teclado KORG EK50", 499990000 [4.999e8], 474990500 [4.749e8], 424991500 [4.249e8], 4, "1792101602001", true, 15
+    ├─ [16419] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::products(4) [staticcall]
+    │   └─ ← [Return] "Adaptador NVME SSD USB 3.1", 16980000 [1.698e7], 16131000 [1.613e7], 14433000 [1.443e7], 47, "1792101601001", true, 15
+    ├─ [16419] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::products(5) [staticcall]
+    │   └─ ← [Return] "Disco SSD 1TB Crucial PCIe Gen4", 164940000 [1.649e8], 156693000 [1.566e8], 140199000 [1.401e8], 6, "1792101601001", true, 15
+    ├─ [16419] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::products(6) [staticcall]
+    │   └─ ← [Return] "Monitor Sceptre 27pulg", 94970000 [9.497e7], 90221500 [9.022e7], 80724500 [8.072e7], 7, "1792101601001", true, 15
+    ├─ [16419] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::products(7) [staticcall]
+    │   └─ ← [Return] "Banco de Pesas FLYBIRD 800lbs", 149980000 [1.499e8], 142481000 [1.424e8], 127483000 [1.274e8], 8, "1792101603001", true, 15
+    ├─ [16419] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::products(8) [staticcall]
+    │   └─ ← [Return] "Mancuernas 5Lbs", 16990000 [1.699e7], 16140500 [1.614e7], 14441500 [1.444e7], 27, "1792101603001", true, 15
+    ├─ [16419] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::products(9) [staticcall]
+    │   └─ ← [Return] "Mat Yoga YOTTOY", 22220000 [2.222e7], 21109000 [2.11e7], 18887000 [1.888e7], 8, "1792101603001", true, 15
+    ├─ [16419] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::products(10) [staticcall]
+    │   └─ ← [Return] "Kit para hornear 6 piezas", 14970000 [1.497e7], 14221500 [1.422e7], 12724500 [1.272e7], 9, "1792101604001", true, 0
+    ├─ [16419] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::products(11) [staticcall]
+    │   └─ ← [Return] "Olla lenta Ninja", 109990000 [1.099e8], 104490500 [1.044e8], 93491500 [9.349e7], 2, "1792101604001", true, 0
+    ├─ [16419] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::products(12) [staticcall]
+    │   └─ ← [Return] "Kit Sushi FUNGYAND", 31990000 [3.199e7], 30390500 [3.039e7], 27191500 [2.719e7], 7, "1792101604001", true, 0
+    ├─ [0] VM::parseJson("<JSON file>", ".purchases") [staticcall]
+    │   └─ ← [Return] <encoded JSON value>
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] 0x976EA74026E726554dB657fA54763abd0C3a0aa9
+    ├─ [0] VM::startBroadcast(<pk>)
+    │   └─ ← [Return]
+    ├─ [8196] 0x5FbDB2315678afecb367f032d93F642f64180aa3::approve(0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, 1000000000000 [1e12])
+    │   ├─ emit Approval(owner: 0x976EA74026E726554dB657fA54763abd0C3a0aa9, spender: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, value: 1000000000000 [1e12])
+    │   └─ ← [Return] true
+    ├─ [70883] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::addToCart(2, 1)
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x976EA74026E726554dB657fA54763abd0C3a0aa9) [staticcall]
+    │   └─ ← [Return] 2500000000 [2.5e9]
+    ├─ [426701] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::checkout()
+    │   ├─ [9714] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x976EA74026E726554dB657fA54763abd0C3a0aa9, 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, 80646050 [8.064e7])
+    │   │   ├─ emit Transfer(from: 0x976EA74026E726554dB657fA54763abd0C3a0aa9, to: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, value: 80646050 [8.064e7])
+    │   │   └─ ← [Return] true
+    │   ├─ [9714] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x976EA74026E726554dB657fA54763abd0C3a0aa9, 0x23618e81E3f5cdF7f54C3d65f7FBc0aBf5B21E8f, 725814450 [7.258e8])
+    │   │   ├─ emit Transfer(from: 0x976EA74026E726554dB657fA54763abd0C3a0aa9, to: 0x23618e81E3f5cdF7f54C3d65f7FBc0aBf5B21E8f, value: 725814450 [7.258e8])
+    │   │   └─ ← [Return] true
+    │   ├─ emit PurchaseCompleted(buyer: 0x976EA74026E726554dB657fA54763abd0C3a0aa9, companyRuc: 0x2f723465ec5c9321c854a7cb12eef3318dc9a8fab16bbfb902ff7df6b2b92a6b, invoiceId: "001-001-000000005", total: 806460500 [8.064e8])
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x976EA74026E726554dB657fA54763abd0C3a0aa9) [staticcall]
+    │   └─ ← [Return] 1693539500 [1.693e9]
+    ├─ [0] VM::stopBroadcast()
+    │   └─ ← [Return]
+    ├─ [0] console::log("Compra OK - Cliente: Tony Corlleone") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Producto ID:", 2, " Cantidad:", 1) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Anterior:", 2500000000 [2.5e9]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Gasto Total:", 806460500 [8.064e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Restante:", 1693539500 [1.693e9]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] 0x976EA74026E726554dB657fA54763abd0C3a0aa9
+    ├─ [0] VM::startBroadcast(<pk>)
+    │   └─ ← [Return]
+    ├─ [3296] 0x5FbDB2315678afecb367f032d93F642f64180aa3::approve(0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, 1000000000000 [1e12])
+    │   ├─ emit Approval(owner: 0x976EA74026E726554dB657fA54763abd0C3a0aa9, spender: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, value: 1000000000000 [1e12])
+    │   └─ ← [Return] true
+    ├─ [62683] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::addToCart(3, 1)
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x976EA74026E726554dB657fA54763abd0C3a0aa9) [staticcall]
+    │   └─ ← [Return] 1693539500 [1.693e9]
+    ├─ [364696] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::checkout()
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x976EA74026E726554dB657fA54763abd0C3a0aa9, 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, 57498850 [5.749e7])
+    │   │   ├─ emit Transfer(from: 0x976EA74026E726554dB657fA54763abd0C3a0aa9, to: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, value: 57498850 [5.749e7])
+    │   │   └─ ← [Return] true
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x976EA74026E726554dB657fA54763abd0C3a0aa9, 0x23618e81E3f5cdF7f54C3d65f7FBc0aBf5B21E8f, 517489650 [5.174e8])
+    │   │   ├─ emit Transfer(from: 0x976EA74026E726554dB657fA54763abd0C3a0aa9, to: 0x23618e81E3f5cdF7f54C3d65f7FBc0aBf5B21E8f, value: 517489650 [5.174e8])
+    │   │   └─ ← [Return] true
+    │   ├─ emit PurchaseCompleted(buyer: 0x976EA74026E726554dB657fA54763abd0C3a0aa9, companyRuc: 0x2f723465ec5c9321c854a7cb12eef3318dc9a8fab16bbfb902ff7df6b2b92a6b, invoiceId: "001-001-000000006", total: 574988500 [5.749e8])
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x976EA74026E726554dB657fA54763abd0C3a0aa9) [staticcall]
+    │   └─ ← [Return] 1118551000 [1.118e9]
+    ├─ [0] VM::stopBroadcast()
+    │   └─ ← [Return]
+    ├─ [0] console::log("Compra OK - Cliente: Tony Corlleone") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Producto ID:", 3, " Cantidad:", 1) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Anterior:", 1693539500 [1.693e9]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Gasto Total:", 574988500 [5.749e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Restante:", 1118551000 [1.118e9]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] 0x976EA74026E726554dB657fA54763abd0C3a0aa9
+    ├─ [0] VM::startBroadcast(<pk>)
+    │   └─ ← [Return]
+    ├─ [3296] 0x5FbDB2315678afecb367f032d93F642f64180aa3::approve(0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, 1000000000000 [1e12])
+    │   ├─ emit Approval(owner: 0x976EA74026E726554dB657fA54763abd0C3a0aa9, spender: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, value: 1000000000000 [1e12])
+    │   └─ ← [Return] true
+    ├─ [62683] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::addToCart(6, 1)
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x976EA74026E726554dB657fA54763abd0C3a0aa9) [staticcall]
+    │   └─ ← [Return] 1118551000 [1.118e9]
+    ├─ [375096] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::checkout()
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x976EA74026E726554dB657fA54763abd0C3a0aa9, 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, 10921550 [1.092e7])
+    │   │   ├─ emit Transfer(from: 0x976EA74026E726554dB657fA54763abd0C3a0aa9, to: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, value: 10921550 [1.092e7])
+    │   │   └─ ← [Return] true
+    │   ├─ [9714] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x976EA74026E726554dB657fA54763abd0C3a0aa9, 0x28c7964Cde252957ea267018C7EF5D3750422da8, 98293950 [9.829e7])
+    │   │   ├─ emit Transfer(from: 0x976EA74026E726554dB657fA54763abd0C3a0aa9, to: 0x28c7964Cde252957ea267018C7EF5D3750422da8, value: 98293950 [9.829e7])
+    │   │   └─ ← [Return] true
+    │   ├─ emit PurchaseCompleted(buyer: 0x976EA74026E726554dB657fA54763abd0C3a0aa9, companyRuc: 0x78768260b13d27ce79ccd35af9589085fc6698b961412071b990a62da48bc1c6, invoiceId: "001-001-000000009", total: 109215500 [1.092e8])
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x976EA74026E726554dB657fA54763abd0C3a0aa9) [staticcall]
+    │   └─ ← [Return] 1009335500 [1.009e9]
+    ├─ [0] VM::stopBroadcast()
+    │   └─ ← [Return]
+    ├─ [0] console::log("Compra OK - Cliente: Tony Corlleone") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Producto ID:", 6, " Cantidad:", 1) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Anterior:", 1118551000 [1.118e9]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Gasto Total:", 109215500 [1.092e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Restante:", 1009335500 [1.009e9]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] 0x976EA74026E726554dB657fA54763abd0C3a0aa9
+    ├─ [0] VM::startBroadcast(<pk>)
+    │   └─ ← [Return]
+    ├─ [3296] 0x5FbDB2315678afecb367f032d93F642f64180aa3::approve(0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, 1000000000000 [1e12])
+    │   ├─ emit Approval(owner: 0x976EA74026E726554dB657fA54763abd0C3a0aa9, spender: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, value: 1000000000000 [1e12])
+    │   └─ ← [Return] true
+    ├─ [62683] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::addToCart(11, 2)
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x976EA74026E726554dB657fA54763abd0C3a0aa9) [staticcall]
+    │   └─ ← [Return] 1009335500 [1.009e9]
+    ├─ [330350] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::checkout()
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x976EA74026E726554dB657fA54763abd0C3a0aa9, 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, 21998000 [2.199e7])
+    │   │   ├─ emit Transfer(from: 0x976EA74026E726554dB657fA54763abd0C3a0aa9, to: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, value: 21998000 [2.199e7])
+    │   │   └─ ← [Return] true
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x976EA74026E726554dB657fA54763abd0C3a0aa9, 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, 197982000 [1.979e8])
+    │   │   ├─ emit Transfer(from: 0x976EA74026E726554dB657fA54763abd0C3a0aa9, to: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, value: 197982000 [1.979e8])
+    │   │   └─ ← [Return] true
+    │   ├─ emit PurchaseCompleted(buyer: 0x976EA74026E726554dB657fA54763abd0C3a0aa9, companyRuc: 0xc563fce27322c23bdafbf54c2309991ab76c753ed7fb4ac4a8f49cc3699ba16d, invoiceId: "001-001-000000006", total: 219980000 [2.199e8])
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x976EA74026E726554dB657fA54763abd0C3a0aa9) [staticcall]
+    │   └─ ← [Return] 789355500 [7.893e8]
+    ├─ [0] VM::stopBroadcast()
+    │   └─ ← [Return]
+    ├─ [0] console::log("Compra OK - Cliente: Tony Corlleone") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Producto ID:", 11, " Cantidad:", 2) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Anterior:", 1009335500 [1.009e9]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Gasto Total:", 219980000 [2.199e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Restante:", 789355500 [7.893e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc
+    ├─ [0] VM::startBroadcast(<pk>)
+    │   └─ ← [Return]
+    ├─ [8196] 0x5FbDB2315678afecb367f032d93F642f64180aa3::approve(0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, 1000000000000 [1e12])
+    │   ├─ emit Approval(owner: 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, spender: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, value: 1000000000000 [1e12])
+    │   └─ ← [Return] true
+    ├─ [70883] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::addToCart(10, 1)
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc) [staticcall]
+    │   └─ ← [Return] 1800000000 [1.8e9]
+    ├─ [324750] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::checkout()
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, 1497000 [1.497e6])
+    │   │   ├─ emit Transfer(from: 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, to: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, value: 1497000 [1.497e6])
+    │   │   └─ ← [Return] true
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, 13473000 [1.347e7])
+    │   │   ├─ emit Transfer(from: 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, to: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, value: 13473000 [1.347e7])
+    │   │   └─ ← [Return] true
+    │   ├─ emit PurchaseCompleted(buyer: 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, companyRuc: 0xc563fce27322c23bdafbf54c2309991ab76c753ed7fb4ac4a8f49cc3699ba16d, invoiceId: "001-001-000000007", total: 14970000 [1.497e7])
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc) [staticcall]
+    │   └─ ← [Return] 1785030000 [1.785e9]
+    ├─ [0] VM::stopBroadcast()
+    │   └─ ← [Return]
+    ├─ [0] console::log("Compra OK - Cliente: Leslie Campcastlle") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Producto ID:", 10, " Cantidad:", 1) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Anterior:", 1800000000 [1.8e9]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Gasto Total:", 14970000 [1.497e7]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Restante:", 1785030000 [1.785e9]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc
+    ├─ [0] VM::startBroadcast(<pk>)
+    │   └─ ← [Return]
+    ├─ [3296] 0x5FbDB2315678afecb367f032d93F642f64180aa3::approve(0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, 1000000000000 [1e12])
+    │   ├─ emit Approval(owner: 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, spender: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, value: 1000000000000 [1e12])
+    │   └─ ← [Return] true
+    ├─ [62683] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::addToCart(8, 1)
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc) [staticcall]
+    │   └─ ← [Return] 1785030000 [1.785e9]
+    ├─ [375096] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::checkout()
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, 1953850 [1.953e6])
+    │   │   ├─ emit Transfer(from: 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, to: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, value: 1953850 [1.953e6])
+    │   │   └─ ← [Return] true
+    │   ├─ [9714] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720, 17584650 [1.758e7])
+    │   │   ├─ emit Transfer(from: 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, to: 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720, value: 17584650 [1.758e7])
+    │   │   └─ ← [Return] true
+    │   ├─ emit PurchaseCompleted(buyer: 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, companyRuc: 0xe03d368450c5dd1ce723c4b1f3eb94e938a2ee72bb8e282f3d2f97de86c8d9c6, invoiceId: "001-001-000000007", total: 19538500 [1.953e7])
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc) [staticcall]
+    │   └─ ← [Return] 1765491500 [1.765e9]
+    ├─ [0] VM::stopBroadcast()
+    │   └─ ← [Return]
+    ├─ [0] console::log("Compra OK - Cliente: Leslie Campcastlle") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Producto ID:", 8, " Cantidad:", 1) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Anterior:", 1785030000 [1.785e9]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Gasto Total:", 19538500 [1.953e7]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Restante:", 1765491500 [1.765e9]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc
+    ├─ [0] VM::startBroadcast(<pk>)
+    │   └─ ← [Return]
+    ├─ [3296] 0x5FbDB2315678afecb367f032d93F642f64180aa3::approve(0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, 1000000000000 [1e12])
+    │   ├─ emit Approval(owner: 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, spender: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, value: 1000000000000 [1e12])
+    │   └─ ← [Return] true
+    ├─ [62683] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::addToCart(9, 1)
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc) [staticcall]
+    │   └─ ← [Return] 1765491500 [1.765e9]
+    ├─ [364696] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::checkout()
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, 2555300 [2.555e6])
+    │   │   ├─ emit Transfer(from: 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, to: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, value: 2555300 [2.555e6])
+    │   │   └─ ← [Return] true
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720, 22997700 [2.299e7])
+    │   │   ├─ emit Transfer(from: 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, to: 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720, value: 22997700 [2.299e7])
+    │   │   └─ ← [Return] true
+    │   ├─ emit PurchaseCompleted(buyer: 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, companyRuc: 0xe03d368450c5dd1ce723c4b1f3eb94e938a2ee72bb8e282f3d2f97de86c8d9c6, invoiceId: "001-001-000000008", total: 25553000 [2.555e7])
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc) [staticcall]
+    │   └─ ← [Return] 1739938500 [1.739e9]
+    ├─ [0] VM::stopBroadcast()
+    │   └─ ← [Return]
+    ├─ [0] console::log("Compra OK - Cliente: Leslie Campcastlle") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Producto ID:", 9, " Cantidad:", 1) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Anterior:", 1765491500 [1.765e9]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Gasto Total:", 25553000 [2.555e7]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Restante:", 1739938500 [1.739e9]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc
+    ├─ [0] VM::startBroadcast(<pk>)
+    │   └─ ← [Return]
+    ├─ [3296] 0x5FbDB2315678afecb367f032d93F642f64180aa3::approve(0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, 1000000000000 [1e12])
+    │   ├─ emit Approval(owner: 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, spender: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, value: 1000000000000 [1e12])
+    │   └─ ← [Return] true
+    ├─ [62683] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::addToCart(6, 1)
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc) [staticcall]
+    │   └─ ← [Return] 1739938500 [1.739e9]
+    ├─ [361896] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::checkout()
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, 10921550 [1.092e7])
+    │   │   ├─ emit Transfer(from: 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, to: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, value: 10921550 [1.092e7])
+    │   │   └─ ← [Return] true
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, 0x28c7964Cde252957ea267018C7EF5D3750422da8, 98293950 [9.829e7])
+    │   │   ├─ emit Transfer(from: 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, to: 0x28c7964Cde252957ea267018C7EF5D3750422da8, value: 98293950 [9.829e7])
+    │   │   └─ ← [Return] true
+    │   ├─ emit PurchaseCompleted(buyer: 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc, companyRuc: 0x78768260b13d27ce79ccd35af9589085fc6698b961412071b990a62da48bc1c6, invoiceId: "001-001-000000010", total: 109215500 [1.092e8])
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc) [staticcall]
+    │   └─ ← [Return] 1630723000 [1.63e9]
+    ├─ [0] VM::stopBroadcast()
+    │   └─ ← [Return]
+    ├─ [0] console::log("Compra OK - Cliente: Leslie Campcastlle") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Producto ID:", 6, " Cantidad:", 1) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Anterior:", 1739938500 [1.739e9]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Gasto Total:", 109215500 [1.092e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Restante:", 1630723000 [1.63e9]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65
+    ├─ [0] VM::startBroadcast(<pk>)
+    │   └─ ← [Return]
+    ├─ [8196] 0x5FbDB2315678afecb367f032d93F642f64180aa3::approve(0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, 1000000000000 [1e12])
+    │   ├─ emit Approval(owner: 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, spender: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, value: 1000000000000 [1e12])
+    │   └─ ← [Return] true
+    ├─ [70883] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::addToCart(4, 1)
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65) [staticcall]
+    │   └─ ← [Return] 1000000000 [1e9]
+    ├─ [364696] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::checkout()
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, 1952700 [1.952e6])
+    │   │   ├─ emit Transfer(from: 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, to: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, value: 1952700 [1.952e6])
+    │   │   └─ ← [Return] true
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, 0x28c7964Cde252957ea267018C7EF5D3750422da8, 17574300 [1.757e7])
+    │   │   ├─ emit Transfer(from: 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, to: 0x28c7964Cde252957ea267018C7EF5D3750422da8, value: 17574300 [1.757e7])
+    │   │   └─ ← [Return] true
+    │   ├─ emit PurchaseCompleted(buyer: 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, companyRuc: 0x78768260b13d27ce79ccd35af9589085fc6698b961412071b990a62da48bc1c6, invoiceId: "001-001-000000011", total: 19527000 [1.952e7])
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65) [staticcall]
+    │   └─ ← [Return] 980473000 [9.804e8]
+    ├─ [0] VM::stopBroadcast()
+    │   └─ ← [Return]
+    ├─ [0] console::log("Compra OK - Cliente: Aura Fraser") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Producto ID:", 4, " Cantidad:", 1) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Anterior:", 1000000000 [1e9]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Gasto Total:", 19527000 [1.952e7]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Restante:", 980473000 [9.804e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65
+    ├─ [0] VM::startBroadcast(<pk>)
+    │   └─ ← [Return]
+    ├─ [3296] 0x5FbDB2315678afecb367f032d93F642f64180aa3::approve(0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, 1000000000000 [1e12])
+    │   ├─ emit Approval(owner: 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, spender: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, value: 1000000000000 [1e12])
+    │   └─ ← [Return] true
+    ├─ [62683] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::addToCart(5, 1)
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65) [staticcall]
+    │   └─ ← [Return] 980473000 [9.804e8]
+    ├─ [364696] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::checkout()
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, 18968100 [1.896e7])
+    │   │   ├─ emit Transfer(from: 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, to: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, value: 18968100 [1.896e7])
+    │   │   └─ ← [Return] true
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, 0x28c7964Cde252957ea267018C7EF5D3750422da8, 170712900 [1.707e8])
+    │   │   ├─ emit Transfer(from: 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, to: 0x28c7964Cde252957ea267018C7EF5D3750422da8, value: 170712900 [1.707e8])
+    │   │   └─ ← [Return] true
+    │   ├─ emit PurchaseCompleted(buyer: 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, companyRuc: 0x78768260b13d27ce79ccd35af9589085fc6698b961412071b990a62da48bc1c6, invoiceId: "001-001-000000012", total: 189681000 [1.896e8])
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65) [staticcall]
+    │   └─ ← [Return] 790792000 [7.907e8]
+    ├─ [0] VM::stopBroadcast()
+    │   └─ ← [Return]
+    ├─ [0] console::log("Compra OK - Cliente: Aura Fraser") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Producto ID:", 5, " Cantidad:", 1) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Anterior:", 980473000 [9.804e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Gasto Total:", 189681000 [1.896e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Restante:", 790792000 [7.907e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65
+    ├─ [0] VM::startBroadcast(<pk>)
+    │   └─ ← [Return]
+    ├─ [3296] 0x5FbDB2315678afecb367f032d93F642f64180aa3::approve(0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, 1000000000000 [1e12])
+    │   ├─ emit Approval(owner: 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, spender: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, value: 1000000000000 [1e12])
+    │   └─ ← [Return] true
+    ├─ [62683] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::addToCart(1, 1)
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65) [staticcall]
+    │   └─ ← [Return] 790792000 [7.907e8]
+    ├─ [364696] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::checkout()
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, 34498850 [3.449e7])
+    │   │   ├─ emit Transfer(from: 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, to: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, value: 34498850 [3.449e7])
+    │   │   └─ ← [Return] true
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, 0x23618e81E3f5cdF7f54C3d65f7FBc0aBf5B21E8f, 310489650 [3.104e8])
+    │   │   ├─ emit Transfer(from: 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, to: 0x23618e81E3f5cdF7f54C3d65f7FBc0aBf5B21E8f, value: 310489650 [3.104e8])
+    │   │   └─ ← [Return] true
+    │   ├─ emit PurchaseCompleted(buyer: 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, companyRuc: 0x2f723465ec5c9321c854a7cb12eef3318dc9a8fab16bbfb902ff7df6b2b92a6b, invoiceId: "001-001-000000007", total: 344988500 [3.449e8])
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65) [staticcall]
+    │   └─ ← [Return] 445803500 [4.458e8]
+    ├─ [0] VM::stopBroadcast()
+    │   └─ ← [Return]
+    ├─ [0] console::log("Compra OK - Cliente: Aura Fraser") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Producto ID:", 1, " Cantidad:", 1) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Anterior:", 790792000 [7.907e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Gasto Total:", 344988500 [3.449e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Restante:", 445803500 [4.458e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65
+    ├─ [0] VM::startBroadcast(<pk>)
+    │   └─ ← [Return]
+    ├─ [3296] 0x5FbDB2315678afecb367f032d93F642f64180aa3::approve(0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, 1000000000000 [1e12])
+    │   ├─ emit Approval(owner: 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, spender: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, value: 1000000000000 [1e12])
+    │   └─ ← [Return] true
+    ├─ [62683] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::addToCart(7, 1)
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65) [staticcall]
+    │   └─ ← [Return] 445803500 [4.458e8]
+    ├─ [364696] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::checkout()
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, 17247700 [1.724e7])
+    │   │   ├─ emit Transfer(from: 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, to: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, value: 17247700 [1.724e7])
+    │   │   └─ ← [Return] true
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720, 155229300 [1.552e8])
+    │   │   ├─ emit Transfer(from: 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, to: 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720, value: 155229300 [1.552e8])
+    │   │   └─ ← [Return] true
+    │   ├─ emit PurchaseCompleted(buyer: 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, companyRuc: 0xe03d368450c5dd1ce723c4b1f3eb94e938a2ee72bb8e282f3d2f97de86c8d9c6, invoiceId: "001-001-000000009", total: 172477000 [1.724e8])
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65) [staticcall]
+    │   └─ ← [Return] 273326500 [2.733e8]
+    ├─ [0] VM::stopBroadcast()
+    │   └─ ← [Return]
+    ├─ [0] console::log("Compra OK - Cliente: Aura Fraser") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Producto ID:", 7, " Cantidad:", 1) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Anterior:", 445803500 [4.458e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Gasto Total:", 172477000 [1.724e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Restante:", 273326500 [2.733e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65
+    ├─ [0] VM::startBroadcast(<pk>)
+    │   └─ ← [Return]
+    ├─ [3296] 0x5FbDB2315678afecb367f032d93F642f64180aa3::approve(0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, 1000000000000 [1e12])
+    │   ├─ emit Approval(owner: 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, spender: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, value: 1000000000000 [1e12])
+    │   └─ ← [Return] true
+    ├─ [62683] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::addToCart(12, 1)
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65) [staticcall]
+    │   └─ ← [Return] 273326500 [2.733e8]
+    ├─ [324750] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::checkout()
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, 3199000 [3.199e6])
+    │   │   ├─ emit Transfer(from: 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, to: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, value: 3199000 [3.199e6])
+    │   │   └─ ← [Return] true
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, 28791000 [2.879e7])
+    │   │   ├─ emit Transfer(from: 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, to: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, value: 28791000 [2.879e7])
+    │   │   └─ ← [Return] true
+    │   ├─ emit PurchaseCompleted(buyer: 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65, companyRuc: 0xc563fce27322c23bdafbf54c2309991ab76c753ed7fb4ac4a8f49cc3699ba16d, invoiceId: "001-001-000000008", total: 31990000 [3.199e7])
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65) [staticcall]
+    │   └─ ← [Return] 241336500 [2.413e8]
+    ├─ [0] VM::stopBroadcast()
+    │   └─ ← [Return]
+    ├─ [0] console::log("Compra OK - Cliente: Aura Fraser") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Producto ID:", 12, " Cantidad:", 1) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Anterior:", 273326500 [2.733e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Gasto Total:", 31990000 [3.199e7]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Restante:", 241336500 [2.413e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] 0x90F79bf6EB2c4f870365E785982E1f101E93b906
+    ├─ [0] VM::startBroadcast(<pk>)
+    │   └─ ← [Return]
+    ├─ [8196] 0x5FbDB2315678afecb367f032d93F642f64180aa3::approve(0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, 1000000000000 [1e12])
+    │   ├─ emit Approval(owner: 0x90F79bf6EB2c4f870365E785982E1f101E93b906, spender: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, value: 1000000000000 [1e12])
+    │   └─ ← [Return] true
+    ├─ [70883] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::addToCart(9, 1)
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x90F79bf6EB2c4f870365E785982E1f101E93b906) [staticcall]
+    │   └─ ← [Return] 700000000 [7e8]
+    ├─ [361896] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::checkout()
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x90F79bf6EB2c4f870365E785982E1f101E93b906, 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, 2555300 [2.555e6])
+    │   │   ├─ emit Transfer(from: 0x90F79bf6EB2c4f870365E785982E1f101E93b906, to: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, value: 2555300 [2.555e6])
+    │   │   └─ ← [Return] true
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x90F79bf6EB2c4f870365E785982E1f101E93b906, 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720, 22997700 [2.299e7])
+    │   │   ├─ emit Transfer(from: 0x90F79bf6EB2c4f870365E785982E1f101E93b906, to: 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720, value: 22997700 [2.299e7])
+    │   │   └─ ← [Return] true
+    │   ├─ emit PurchaseCompleted(buyer: 0x90F79bf6EB2c4f870365E785982E1f101E93b906, companyRuc: 0xe03d368450c5dd1ce723c4b1f3eb94e938a2ee72bb8e282f3d2f97de86c8d9c6, invoiceId: "001-001-000000010", total: 25553000 [2.555e7])
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x90F79bf6EB2c4f870365E785982E1f101E93b906) [staticcall]
+    │   └─ ← [Return] 674447000 [6.744e8]
+    ├─ [0] VM::stopBroadcast()
+    │   └─ ← [Return]
+    ├─ [0] console::log("Compra OK - Cliente: Carol Danvers") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Producto ID:", 9, " Cantidad:", 1) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Anterior:", 700000000 [7e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Gasto Total:", 25553000 [2.555e7]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Restante:", 674447000 [6.744e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] 0x90F79bf6EB2c4f870365E785982E1f101E93b906
+    ├─ [0] VM::startBroadcast(<pk>)
+    │   └─ ← [Return]
+    ├─ [3296] 0x5FbDB2315678afecb367f032d93F642f64180aa3::approve(0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, 1000000000000 [1e12])
+    │   ├─ emit Approval(owner: 0x90F79bf6EB2c4f870365E785982E1f101E93b906, spender: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, value: 1000000000000 [1e12])
+    │   └─ ← [Return] true
+    ├─ [62683] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::addToCart(8, 2)
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x90F79bf6EB2c4f870365E785982E1f101E93b906) [staticcall]
+    │   └─ ← [Return] 674447000 [6.744e8]
+    ├─ [361896] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::checkout()
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x90F79bf6EB2c4f870365E785982E1f101E93b906, 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, 3907700 [3.907e6])
+    │   │   ├─ emit Transfer(from: 0x90F79bf6EB2c4f870365E785982E1f101E93b906, to: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, value: 3907700 [3.907e6])
+    │   │   └─ ← [Return] true
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x90F79bf6EB2c4f870365E785982E1f101E93b906, 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720, 35169300 [3.516e7])
+    │   │   ├─ emit Transfer(from: 0x90F79bf6EB2c4f870365E785982E1f101E93b906, to: 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720, value: 35169300 [3.516e7])
+    │   │   └─ ← [Return] true
+    │   ├─ emit PurchaseCompleted(buyer: 0x90F79bf6EB2c4f870365E785982E1f101E93b906, companyRuc: 0xe03d368450c5dd1ce723c4b1f3eb94e938a2ee72bb8e282f3d2f97de86c8d9c6, invoiceId: "001-001-000000011", total: 39077000 [3.907e7])
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x90F79bf6EB2c4f870365E785982E1f101E93b906) [staticcall]
+    │   └─ ← [Return] 635370000 [6.353e8]
+    ├─ [0] VM::stopBroadcast()
+    │   └─ ← [Return]
+    ├─ [0] console::log("Compra OK - Cliente: Carol Danvers") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Producto ID:", 8, " Cantidad:", 2) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Anterior:", 674447000 [6.744e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Gasto Total:", 39077000 [3.907e7]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Restante:", 635370000 [6.353e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] 0x90F79bf6EB2c4f870365E785982E1f101E93b906
+    ├─ [0] VM::startBroadcast(<pk>)
+    │   └─ ← [Return]
+    ├─ [3296] 0x5FbDB2315678afecb367f032d93F642f64180aa3::approve(0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, 1000000000000 [1e12])
+    │   ├─ emit Approval(owner: 0x90F79bf6EB2c4f870365E785982E1f101E93b906, spender: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, value: 1000000000000 [1e12])
+    │   └─ ← [Return] true
+    ├─ [62683] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::addToCart(12, 2)
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x90F79bf6EB2c4f870365E785982E1f101E93b906) [staticcall]
+    │   └─ ← [Return] 635370000 [6.353e8]
+    ├─ [321950] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::checkout()
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x90F79bf6EB2c4f870365E785982E1f101E93b906, 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, 6398000 [6.398e6])
+    │   │   ├─ emit Transfer(from: 0x90F79bf6EB2c4f870365E785982E1f101E93b906, to: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, value: 6398000 [6.398e6])
+    │   │   └─ ← [Return] true
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x90F79bf6EB2c4f870365E785982E1f101E93b906, 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, 57582000 [5.758e7])
+    │   │   ├─ emit Transfer(from: 0x90F79bf6EB2c4f870365E785982E1f101E93b906, to: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, value: 57582000 [5.758e7])
+    │   │   └─ ← [Return] true
+    │   ├─ emit PurchaseCompleted(buyer: 0x90F79bf6EB2c4f870365E785982E1f101E93b906, companyRuc: 0xc563fce27322c23bdafbf54c2309991ab76c753ed7fb4ac4a8f49cc3699ba16d, invoiceId: "001-001-000000009", total: 63980000 [6.398e7])
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x90F79bf6EB2c4f870365E785982E1f101E93b906) [staticcall]
+    │   └─ ← [Return] 571390000 [5.713e8]
+    ├─ [0] VM::stopBroadcast()
+    │   └─ ← [Return]
+    ├─ [0] console::log("Compra OK - Cliente: Carol Danvers") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Producto ID:", 12, " Cantidad:", 2) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Anterior:", 635370000 [6.353e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Gasto Total:", 63980000 [6.398e7]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Restante:", 571390000 [5.713e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC
+    ├─ [0] VM::startBroadcast(<pk>)
+    │   └─ ← [Return]
+    ├─ [8196] 0x5FbDB2315678afecb367f032d93F642f64180aa3::approve(0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, 1000000000000 [1e12])
+    │   ├─ emit Approval(owner: 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC, spender: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, value: 1000000000000 [1e12])
+    │   └─ ← [Return] true
+    ├─ [70883] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::addToCart(4, 2)
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC) [staticcall]
+    │   └─ ← [Return] 800000000 [8e8]
+    ├─ [361896] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::checkout()
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC, 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, 3905400 [3.905e6])
+    │   │   ├─ emit Transfer(from: 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC, to: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, value: 3905400 [3.905e6])
+    │   │   └─ ← [Return] true
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC, 0x28c7964Cde252957ea267018C7EF5D3750422da8, 35148600 [3.514e7])
+    │   │   ├─ emit Transfer(from: 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC, to: 0x28c7964Cde252957ea267018C7EF5D3750422da8, value: 35148600 [3.514e7])
+    │   │   └─ ← [Return] true
+    │   ├─ emit PurchaseCompleted(buyer: 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC, companyRuc: 0x78768260b13d27ce79ccd35af9589085fc6698b961412071b990a62da48bc1c6, invoiceId: "001-001-000000013", total: 39054000 [3.905e7])
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC) [staticcall]
+    │   └─ ← [Return] 760946000 [7.609e8]
+    ├─ [0] VM::stopBroadcast()
+    │   └─ ← [Return]
+    ├─ [0] console::log("Compra OK - Cliente: Bob Dylan") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Producto ID:", 4, " Cantidad:", 2) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Anterior:", 800000000 [8e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Gasto Total:", 39054000 [3.905e7]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Restante:", 760946000 [7.609e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC
+    ├─ [0] VM::startBroadcast(<pk>)
+    │   └─ ← [Return]
+    ├─ [3296] 0x5FbDB2315678afecb367f032d93F642f64180aa3::approve(0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, 1000000000000 [1e12])
+    │   ├─ emit Approval(owner: 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC, spender: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, value: 1000000000000 [1e12])
+    │   └─ ← [Return] true
+    ├─ [62683] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::addToCart(5, 2)
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC) [staticcall]
+    │   └─ ← [Return] 760946000 [7.609e8]
+    ├─ [361896] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::checkout()
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC, 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, 37936200 [3.793e7])
+    │   │   ├─ emit Transfer(from: 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC, to: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, value: 37936200 [3.793e7])
+    │   │   └─ ← [Return] true
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC, 0x28c7964Cde252957ea267018C7EF5D3750422da8, 341425800 [3.414e8])
+    │   │   ├─ emit Transfer(from: 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC, to: 0x28c7964Cde252957ea267018C7EF5D3750422da8, value: 341425800 [3.414e8])
+    │   │   └─ ← [Return] true
+    │   ├─ emit PurchaseCompleted(buyer: 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC, companyRuc: 0x78768260b13d27ce79ccd35af9589085fc6698b961412071b990a62da48bc1c6, invoiceId: "001-001-000000014", total: 379362000 [3.793e8])
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC) [staticcall]
+    │   └─ ← [Return] 381584000 [3.815e8]
+    ├─ [0] VM::stopBroadcast()
+    │   └─ ← [Return]
+    ├─ [0] console::log("Compra OK - Cliente: Bob Dylan") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Producto ID:", 5, " Cantidad:", 2) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Anterior:", 760946000 [7.609e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Gasto Total:", 379362000 [3.793e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Restante:", 381584000 [3.815e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC
+    ├─ [0] VM::startBroadcast(<pk>)
+    │   └─ ← [Return]
+    ├─ [3296] 0x5FbDB2315678afecb367f032d93F642f64180aa3::approve(0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, 1000000000000 [1e12])
+    │   ├─ emit Approval(owner: 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC, spender: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, value: 1000000000000 [1e12])
+    │   └─ ← [Return] true
+    ├─ [62683] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::addToCart(7, 1)
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC) [staticcall]
+    │   └─ ← [Return] 381584000 [3.815e8]
+    ├─ [361896] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::checkout()
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC, 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, 17247700 [1.724e7])
+    │   │   ├─ emit Transfer(from: 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC, to: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8, value: 17247700 [1.724e7])
+    │   │   └─ ← [Return] true
+    │   ├─ [4914] 0x5FbDB2315678afecb367f032d93F642f64180aa3::transferFrom(0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC, 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720, 155229300 [1.552e8])
+    │   │   ├─ emit Transfer(from: 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC, to: 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720, value: 155229300 [1.552e8])
+    │   │   └─ ← [Return] true
+    │   ├─ emit PurchaseCompleted(buyer: 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC, companyRuc: 0xe03d368450c5dd1ce723c4b1f3eb94e938a2ee72bb8e282f3d2f97de86c8d9c6, invoiceId: "001-001-000000012", total: 172477000 [1.724e8])
+    │   └─ ← [Stop]
+    ├─ [851] 0x5FbDB2315678afecb367f032d93F642f64180aa3::balanceOf(0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC) [staticcall]
+    │   └─ ← [Return] 209107000 [2.091e8]
+    ├─ [0] VM::stopBroadcast()
+    │   └─ ← [Return]
+    ├─ [0] console::log("Compra OK - Cliente: Bob Dylan") [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Producto ID:", 7, " Cantidad:", 1) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Anterior:", 381584000 [3.815e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Gasto Total:", 172477000 [1.724e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("  Saldo Restante:", 209107000 [2.091e8]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC
+    ├─ [0] VM::startBroadcast(<pk>)
+    │   └─ ← [Return]
+    ├─ [3296] 0x5FbDB2315678afecb367f032d93F642f64180aa3::approve(0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, 1000000000000 [1e12])
+    │   ├─ emit Approval(owner: 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC, spender: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0, value: 1000000000000 [1e12])
+    │   └─ ← [Return] true
+    ├─ [754] 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0::addToCart(11, 1)
+    │   └─ ← [Revert] Stock insuficiente
+    └─ ← [Revert] Stock insuficiente
+
+
+
+== Logs ==
+  Fondos completados (top-up) para: Bob Dylan
+  Fondos completados (top-up) para: Carol Danvers
+  Fondos completados (top-up) para: Aura Fraser
+  Fondos completados (top-up) para: Leslie Campcastlle
+  Fondos completados (top-up) para: Tony Corlleone
+  Compañía ya existe, saltando registro y productos: Alpha Corp
+  Compañía ya existe, saltando registro y productos: Muse Box
+  Compañía ya existe, saltando registro y productos: STFitness
+  Compañía ya existe, saltando registro y productos: CBT Marketplace
+  Compra OK - Cliente: Tony Corlleone
+    Producto ID: 2  Cantidad: 1
+    Saldo Anterior: 2500000000
+    Gasto Total: 806460500
+    Saldo Restante: 1693539500
+  Compra OK - Cliente: Tony Corlleone
+    Producto ID: 3  Cantidad: 1
+    Saldo Anterior: 1693539500
+    Gasto Total: 574988500
+    Saldo Restante: 1118551000
+  Compra OK - Cliente: Tony Corlleone
+    Producto ID: 6  Cantidad: 1
+    Saldo Anterior: 1118551000
+    Gasto Total: 109215500
+    Saldo Restante: 1009335500
+  Compra OK - Cliente: Tony Corlleone
+    Producto ID: 11  Cantidad: 2
+    Saldo Anterior: 1009335500
+    Gasto Total: 219980000
+    Saldo Restante: 789355500
+  Compra OK - Cliente: Leslie Campcastlle
+    Producto ID: 10  Cantidad: 1
+    Saldo Anterior: 1800000000
+    Gasto Total: 14970000
+    Saldo Restante: 1785030000
+  Compra OK - Cliente: Leslie Campcastlle
+    Producto ID: 8  Cantidad: 1
+    Saldo Anterior: 1785030000
+    Gasto Total: 19538500
+    Saldo Restante: 1765491500
+  Compra OK - Cliente: Leslie Campcastlle
+    Producto ID: 9  Cantidad: 1
+    Saldo Anterior: 1765491500
+    Gasto Total: 25553000
+    Saldo Restante: 1739938500
+  Compra OK - Cliente: Leslie Campcastlle
+    Producto ID: 6  Cantidad: 1
+    Saldo Anterior: 1739938500
+    Gasto Total: 109215500
+    Saldo Restante: 1630723000
+  Compra OK - Cliente: Aura Fraser
+    Producto ID: 4  Cantidad: 1
+    Saldo Anterior: 1000000000
+    Gasto Total: 19527000
+    Saldo Restante: 980473000
+  Compra OK - Cliente: Aura Fraser
+    Producto ID: 5  Cantidad: 1
+    Saldo Anterior: 980473000
+    Gasto Total: 189681000
+    Saldo Restante: 790792000
+  Compra OK - Cliente: Aura Fraser
+    Producto ID: 1  Cantidad: 1
+    Saldo Anterior: 790792000
+    Gasto Total: 344988500
+    Saldo Restante: 445803500
+  Compra OK - Cliente: Aura Fraser
+    Producto ID: 7  Cantidad: 1
+    Saldo Anterior: 445803500
+    Gasto Total: 172477000
+    Saldo Restante: 273326500
+  Compra OK - Cliente: Aura Fraser
+    Producto ID: 12  Cantidad: 1
+    Saldo Anterior: 273326500
+    Gasto Total: 31990000
+    Saldo Restante: 241336500
+  Compra OK - Cliente: Carol Danvers
+    Producto ID: 9  Cantidad: 1
+    Saldo Anterior: 700000000
+    Gasto Total: 25553000
+    Saldo Restante: 674447000
+  Compra OK - Cliente: Carol Danvers
+    Producto ID: 8  Cantidad: 2
+    Saldo Anterior: 674447000
+    Gasto Total: 39077000
+    Saldo Restante: 635370000
+  Compra OK - Cliente: Carol Danvers
+    Producto ID: 12  Cantidad: 2
+    Saldo Anterior: 635370000
+    Gasto Total: 63980000
+    Saldo Restante: 571390000
+  Compra OK - Cliente: Bob Dylan
+    Producto ID: 4  Cantidad: 2
+    Saldo Anterior: 800000000
+    Gasto Total: 39054000
+    Saldo Restante: 760946000
+  Compra OK - Cliente: Bob Dylan
+    Producto ID: 5  Cantidad: 2
+    Saldo Anterior: 760946000
+    Gasto Total: 379362000
+    Saldo Restante: 381584000
+  Compra OK - Cliente: Bob Dylan
+    Producto ID: 7  Cantidad: 1
+    Saldo Anterior: 381584000
+    Gasto Total: 172477000
+    Saldo Restante: 209107000
+Error: script failed: Stock insuficiente

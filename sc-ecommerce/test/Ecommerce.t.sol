@@ -177,4 +177,94 @@ contract EcommerceTest is Test {
         (, , , , uint256 stock, , , ) = ecommerce.products(1);
         assertEq(stock, 9);
     }
+
+    function testUpdateProductPermissions() public {
+        testRegisterCompany();
+        string[4] memory initialPhotos = ["p1", "p2", "p3", "p4"];
+        string[4] memory newPhotos = ["n1", "n2", "n3", "n4"];
+
+        vm.prank(vendor);
+        ecommerce.addProduct(
+            "1723456789001",
+            "Laptop",
+            initialPhotos,
+            1000 * 10 ** 6,
+            10,
+            15
+        );
+
+        // 1. Vendedor (Dueño) actualiza Nombre, Precio y FOTOS
+        vm.prank(vendor);
+        ecommerce.updateProduct(
+            1,
+            "Laptop Refurbished",
+            newPhotos,
+            900 * 10 ** 6,
+            15,
+            true
+        );
+
+        (string memory name, uint256 price, , , , , , ) = ecommerce.products(1);
+        assertEq(name, "Laptop Refurbished");
+        assertEq(price, 900 * 10 ** 6);
+
+        string[4] memory currentPhotos = ecommerce.getProductPhotos(1);
+        assertEq(currentPhotos[0], "n1");
+
+        // 2. Admin (No dueño) actualiza Nombre y Precio, pero FOTOS permanecen iguales
+        string[4] memory adminAttemptPhotos = ["a1", "a2", "a3", "a4"];
+        vm.prank(admin);
+        ecommerce.updateProduct(
+            1,
+            "Laptop by Admin",
+            adminAttemptPhotos,
+            850 * 10 ** 6,
+            15,
+            true
+        );
+
+        (name, price, , , , , , ) = ecommerce.products(1);
+        assertEq(name, "Laptop by Admin");
+        assertEq(price, 850 * 10 ** 6);
+
+        currentPhotos = ecommerce.getProductPhotos(1);
+        assertEq(currentPhotos[0], "n1"); // Siguen siendo las que puso el vendor
+
+        // 3. Otro usuario NO puede actualizar
+        vm.expectRevert("No tienes permisos para editar");
+        vm.prank(buyer);
+        ecommerce.updateProduct(1, "Hacked", newPhotos, 1, 0, true);
+    }
+
+    function testUpdateCompanyWallet() public {
+        testRegisterCompany();
+        address newVendorWallet = address(0x999);
+
+        vm.prank(admin);
+        ecommerce.updateCompanyWallet("1723456789001", newVendorWallet);
+
+        (, , address wallet, , , , , , , , , , , , , ) = ecommerce.companies(
+            "1723456789001"
+        );
+        assertEq(wallet, newVendorWallet);
+
+        // Verificar que el mapeo inverso también se actualizó
+        assertEq(ecommerce.walletToRuc(newVendorWallet), "1723456789001");
+        // Verificar que el mapeo antiguo se borró
+        assertEq(ecommerce.walletToRuc(vendor), "");
+    }
+
+    function testUpdateCompanyWalletPermissions() public {
+        testRegisterCompany();
+        address newVendorWallet = address(0x999);
+
+        // Solo el admin puede actualizar
+        vm.expectRevert();
+        vm.prank(buyer);
+        ecommerce.updateCompanyWallet("1723456789001", newVendorWallet);
+
+        vm.expectRevert();
+        vm.prank(vendor);
+        ecommerce.updateCompanyWallet("1723456789001", newVendorWallet);
+    }
 }
